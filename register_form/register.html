@@ -150,7 +150,7 @@
           try {
             // Send a POST request to get course details
             const courseDetailsResponse = await fetch(
-              "http://localhost:5000/getCourseDetails",
+              "https://calai-site.onrender.com/getCourseDetails",
               {
                 method: "POST",
                 headers: {
@@ -181,7 +181,7 @@
 
             // Send registration data to backend
             const registrationResponse = await fetch(
-              "http://localhost:5000/register",
+              "https://calai-site.onrender.com/register",
               {
                 method: "POST",
                 headers: {
