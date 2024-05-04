@@ -199,7 +199,7 @@
 
             // Redirect to review page with query parameters
             const queryParams = `?certification=${courseDetailsData.certName}&name=${name}&email=${email}&courseFee=${courseDetailsData.courseFee}&registrationFee=${courseDetailsData.registrationFee}`;
-            // window.location.href = `../review/review.html${queryParams}`;
+            window.location.href = `../review/review.html${queryParams}`;
           } catch (error) {
             console.error("Error:", error.message);
             // Handle error, display message to the user, etc.
