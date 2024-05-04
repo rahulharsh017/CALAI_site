@@ -1,0 +1,163 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    color: #192081;
+    margin: 0;
+    padding: 0;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #5d5894, #5588cc, #7dd0ff, #5588cc, #5d5894);; /* Gradient background for body */
+    background-size: 400% 400%; /* Background size for smooth transition */
+    animation: gradientAnimation 15s ease infinite; 
+  }
+  @keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+  span{
+    color: #020202;
+  }
+  #scholarshipCodeGroup {
+    display: block;
+  }
+
+  #scholarshipCodeGroup.hidden {
+    display: none;
+  }
+  .card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 600px;
+    width: 100%;
+    margin: 50px;
+  }
+  .details {
+    display: flex;
+    flex-direction: column;
+  }
+  .details p {
+    margin: 5px 0;
+  }
+
+  .form-group {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .container {
+    text-align: left; /* Align content to the left */
+    padding-left: 20px; /* Add padding to the left */
+  }
+  
+  
+  h1 {
+    color: #007bff;
+    padding-bottom: 20px;
+  }
+  
+  p {
+    margin: 10px 0;
+    padding: 5px;
+  }
+  
+  strong {
+    font-weight: bold;
+  }
+  
+  #termsCheckbox,
+  #registerOnlyCheckbox {
+    margin-right: 5px;
+  }
+  
+  #termsCheckbox:checked + label,
+  #registerOnlyCheckbox:checked + label {
+    font-style: italic;
+    color: #007bff;
+  }
+  
+  #termsCheckbox:checked + label::before,
+  #registerOnlyCheckbox:checked + label::before {
+    content: '\2714';
+    margin-right: 5px;
+  }
+  
+  #certification,
+  #name,
+  #email,
+  #country,
+  #rf,
+  #cf,
+  #tf {
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+  
+  #tf {
+    color: #28a745;
+  }
+  
+  label:hover {
+    cursor: pointer;
+    color: #007bff;
+  }
+  
+  label {
+    transition: all 0.3s ease;
+  }
+  .form-group2 {
+    text-align: center; /* Center align the content */
+  }
+  .applyNowButton {
+    font-size: larger;
+    font-weight: bold;
+    
+    height: 32px;
+    width: 10px; /* Set the desired width */
+    padding: 10px; /* Add padding for better appearance */
+    background:transparent; /* Default button background color */
+    color: #0991ec; /* Text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Add some rounded corners */
+    cursor: pointer; /* Add pointer cursor on hover */
+    transition: background-color 0.3s; 
+  }
+  .applyNowButton:hover {
+    color:#444343
+  }
+  .applied {
+    font-weight:100;
+    color: green;
+    font-style: italic;
+  }
+  .payNowButton {
+    font-size: larger;
+    height: 50px;
+    width: 300px; /* Set the desired width */
+    padding: 10px; /* Add padding for better appearance */
+    background-color: #2D22AC; /* Default button background color */
+    color: #fff; /* Text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Add some rounded corners */
+    cursor: pointer; /* Add pointer cursor on hover */
+    transition: background-color 0.3s; 
+  }
+
+  .payNowButton:hover {
+    background-color: #0056b3;
+  }
+
+  .strikethrough {
+    text-decoration: line-through;
+  }

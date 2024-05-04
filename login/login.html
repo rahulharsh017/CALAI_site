@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SignIn&SignUp</title>
+    <link rel="stylesheet" type="text/css" href="login.css" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-auth.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="forms-container">
+        <div class="signin-signup">
+          <form action="" method="POST" class="sign-in-form" id="login-form">
+            <h2 class="title">Sign In</h2>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Email" id="email" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Password" id="password" />
+            </div>
+            <input type="submit" value="Login" class="btn solid" />
+
+            <p class="social-text">Or Sign in with social platforms</p>
+            <button
+              type="button"
+              id="google-signin-btn"
+              class="login-with-google-btn"
+            >
+              Sign in with Google
+            </button>
+          </form>
+
+          <form action="" method="POST" class="sign-up-form" id="sign-up-form">
+            <h2 class="title">Sign Up</h2>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Username" id="username" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-envelope"></i>
+              <input type="email" placeholder="Email" id="email2" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Password" id="password2" />
+            </div>
+            <input type="submit" value="Sign Up" class="btn solid" />
+          </form>
+        </div>
+      </div>
+      <div class="panels-container">
+        <div class="panel left-panel">
+          <div class="content">
+            <h3>New here?</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio
+              minus natus est.
+            </p>
+            <button class="btn transparent" id="sign-up-btn">Sign Up</button>
+          </div>
+          <img src="../images/login.svg" class="image" alt="register images" />
+        </div>
+
+        <div class="panel right-panel">
+          <div class="content">
+            <h3>One of us?</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio
+              minus natus est.
+            </p>
+            <button class="btn transparent" id="sign-in-btn">Sign In</button>
+          </div>
+          <img src="../images/register.svg" class="image" alt="login image" />
+        </div>
+      </div>
+    </div>
+    <script src="login.js"></script>
+    <!-- login.html -->
+
+    <script>
+      const firebaseConfig = {
+        // Your Firebase config object
+        apiKey: "AIzaSyAfZ7eAaBn4wZ03r2eaDGSHifN2ZxPxsnc",
+        authDomain: "calai-proje.firebaseapp.com",
+        projectId: "calai-proje",
+        storageBucket: "calai-proje.appspot.com",
+        messagingSenderId: "106563301878",
+        appId: "1:106563301878:web:47f9dd7f6b1c8f346a57d7",
+        measurementId: "G-LE2YKNGV6L",
+        databaseURL: "https://calai-proje-default-rtdb.firebaseio.com/",
+      };
+      firebase.initializeApp(firebaseConfig);
+      function initializeApp() {
+        document
+          .getElementById("login-form")
+          .addEventListener("submit", async (e) => {
+            e.preventDefault();
+            console.log("sending data to Firebase");
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            try {
+              const userCredential = await firebase
+                .auth()
+                .signInWithEmailAndPassword(email, password);
+              await userCredential.user.updateProfile({
+                displayName: email,
+              });
+              alert("Login successful!");
+              window.location.href = "../index.html";
+            } catch (error) {
+              alert("Invalid Credentials");
+            }
+          });
+
+        document
+          .getElementById("sign-up-form")
+          .addEventListener("submit", async (e) => {
+            e.preventDefault();
+            console.log("Sending data to Firebase Auth...");
+            const username = document.getElementById("username").value;
+            const email = document.getElementById("email2").value;
+            const password = document.getElementById("password2").value;
+
+            try {
+              // Create user with email and password using Firebase Auth
+              const userCredential = await firebase
+                .auth()
+                .createUserWithEmailAndPassword(email, password);
+
+              // Update user profile with the provided username
+              await userCredential.user.updateProfile({
+                displayName: username,
+              });
+
+              // Signup successful, log in the user automatically
+              alert("Signup successful! Logging in...");
+              // Redirect or perform other actions as needed
+              window.location.href = "../index.html";
+            } catch (error) {
+              // If signup fails, display error message
+              alert(error.message);
+            }
+          });
+
+        // Function to initiate Google authentication
+        document
+          .getElementById("google-signin-btn")
+          .addEventListener("click", () => {
+            // Google sign-in button click handler
+            const provider = new firebase.auth.GoogleAuthProvider();
+            firebase
+              .auth()
+              .signInWithPopup(provider)
+              .then((result) => {
+                // Handle successful sign-in if needed
+                const user = result.user;
+
+                // Update user's display name to their email ID
+                user
+                  .updateProfile({
+                    displayName: user.email,
+                  })
+                  .then(() => {
+                    // Display success message and redirect to index page
+                    alert("Login Successful");
+                    console.log("Google sign-in successful:", result);
+                    window.location.href = "../index.html";
+                  })
+                  .catch((error) => {
+                    // Handle errors if the profile update fails
+                    console.error("Error updating display name:", error);
+                  });
+              })
+              .catch((error) => {
+                // Handle errors if needed
+                console.error("Google sign-in error:", error);
+              });
+          });
+      }
+
+      document.addEventListener("DOMContentLoaded", initializeApp);
+    </script>
+  </body>
+</html>

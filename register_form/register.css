@@ -1,0 +1,193 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff; /* White background */
+    background: linear-gradient(135deg, #5d5894, #5588cc, #7dd0ff, #5588cc, #5d5894);; /* Gradient background for body */
+    background-size: 400% 400%; /* Background size for smooth transition */
+    animation: gradientAnimation 15s ease infinite; 
+  }
+  @keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+  .container {
+    max-width: 800px; /* Increased form width */
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #ffffff; /* Same as background color */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #007bff;
+    font-size: 50px;
+  }
+  
+  fieldset {
+    margin-bottom: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    padding-right: 40px;
+  }
+  
+  legend {
+    font-size: 30px;
+    font-weight: bold;
+    color: #192081; /* Blue color for section titles */
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    font-size: 20px;
+    /* font-weight: bold; */
+    color: #555;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="number"],
+  select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease;
+    font-size: 16px; /* Increased font size */
+  }
+  
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  select:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  /* CSS for Date of Birth input */
+input[type="date"] {
+    width: 30%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease;
+    font-size: 16px;
+    /* Additional styles */
+    background-color: #f9f9f9; /* Light gray background */
+  }
+  
+  input[type="date"]:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  
+/* Custom styling for dropdown menus */
+select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease;
+    font-size: 16px;
+    /* Additional styles */
+    background-color: #f9f9f9; /* Light gray background */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30' fill='%23000000'%3E%3Cpath d='M7.5 10L15 17.5 22.5 10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 15px;
+  }
+  
+  /* Custom select arrow */
+  select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  
+  select:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+
+  .form-group2 {
+    text-align: center; /* Center align the content */
+  }
+  
+  input[type="submit"] {
+    font-size: larger;
+    height: 50px;
+    width: 300px; /* Set the desired width */
+    padding: 10px; /* Add padding for better appearance */
+    background-color: #007bff; /* Default button background color */
+    color: #fff; /* Text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Add some rounded corners */
+    cursor: pointer; /* Add pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition effect */
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #0056b3; /* Change background color on hover */
+  }
+  
+  .phone-number-input {
+    display: flex;
+    align-items: center;
+  }
+  
+  .phone-number-input input {
+    flex: 1;
+    margin-right: 10px; /* Adjust spacing between inputs */
+  }
+  
+  #countryCode {
+    width: 70px; /* Adjust the width of the country code input */
+  }
+  
+  .flag-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px; /* Adjust the position as needed */
+    transform: translateY(-50%);
+    width: 30px; /* Adjust the size of the flag icon */
+    height: auto;
+  }
+  

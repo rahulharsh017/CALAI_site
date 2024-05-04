@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" type="text/css" href="./review.css" />
+    <title>Review</title>
+  </head>
+  <body>
+    <div class="card">
+      <div class="container">
+        <h1>Review Your Selections</h1>
+        <div>
+          <p>
+            Selected Certification:
+            <span id="certification"></span>
+          </p>
+          <p>Your Name: <span id="name"></span></p>
+          <p>Your Email: <span id="email"></span></p>
+          <p>Registration fee: <span id="rf"></span></p>
+          <p id="course">
+            Course fee: <span id="cf"></span
+            ><span
+              style="color: rgb(1, 110, 122); font-weight: bold"
+              id="dcf"
+            ></span>
+          </p>
+          <hr />
+          <p>Total fee: <span style="color: #cba135" id="tf"></span></p>
+        </div>
+        <hr />
+        <div class="form-group" id="scholarshipCodeGroup">
+          <label for="scholarshipCode">Scholarship Code (if any):</label>
+          <input
+            type="text"
+            id="scholarshipCode"
+            name="scholarshipCode"
+            style="border-radius: 8px; background-color: #f0f0f0; padding: 8px"
+          />
+          <button class="applyNowButton" id="applyButton">Apply</button>
+          <p
+            style="color: red; text-align: center; font-style: italic"
+            id="couponMessage"
+          ></p>
+        </div>
+        <div class="form-group">
+          <input type="checkbox" id="termsCheckbox" />
+          <label for="termsCheckbox"
+            >I accept the <i>terms & conditions</i></label
+          >
+        </div>
+        <div class="form-group">
+          <input type="checkbox" id="registerOnlyCheckbox" />
+          <label for="registerOnlyCheckbox">I want to register only</label>
+        </div>
+        <div class="form-group2">
+          <button class="payNowButton" id="payNowButton">Pay Now</button>
+        </div>
+        <!-- PayPal button container -->
+      </div>
+    </div>
+    <script src="https://www.paypal.com/sdk/js?client-id=Afy0DmAz8U6F_ockbxHb8Mw8OeAB6YAQqKsxa2s1ZFyK5VSDgRrMGUtc2OabS_w-Mpodu3HpuTvXudJi"></script>
+    <script>
+      //VARIABLES
+      let tot = 0;
+      const payNowButton = document.getElementById("payNowButton");
+      const scholarshipCodeGroup = document.getElementById(
+        "scholarshipCodeGroup"
+      );
+      const couponMessage = document.getElementById("couponMessage");
+      const courseFeeElement = document.getElementById("course");
+      const dcf = document.getElementById("dcf");
+
+      //URL BREAKDOWN
+      const urlParams = new URLSearchParams(window.location.search);
+      const certification = urlParams.get("certification");
+      const name = urlParams.get("name");
+      const email = urlParams.get("email");
+      const employed = urlParams.get("employed");
+      const courseFee = urlParams.get("courseFee");
+      const registrationFee = urlParams.get("registrationFee");
+
+      // REGISTER CHECKBOX
+      registerOnlyCheckbox.addEventListener("change", function () {
+        if (this.checked) {
+          // Checkbox is checked
+          scholarshipCodeGroup.classList.add("hidden");
+          tot = registrationFee;
+          document.getElementById("tf").textContent = `$${registrationFee}`;
+          courseFeeElement.classList.add("strikethrough");
+          document.getElementById("dcf").textContent = ``;
+
+          document.getElementById("cf").classList.remove("strikethrough");
+          console.log(tot);
+          // Handle the action when user wants to register only
+        } else {
+          // Checkbox is not checked
+          applyButton.textContent = "Apply";
+          applyButton.classList.remove("applied");
+          applyButton.disabled = false;
+          couponMessage.textContent = "";
+          scholarshipCodeGroup.classList.remove("hidden");
+          tot = parseInt(registrationFee) + parseInt(courseFee);
+          document.getElementById("tf").textContent = `$${
+            parseInt(registrationFee) + parseInt(courseFee)
+          }`;
+          courseFeeElement.classList.remove("strikethrough");
+          console.log(tot);
+          // Handle the action when user doesn't want to register only
+        }
+      });
+
+      // SETTING VALUES
+      document.getElementById("tf").textContent = `$${
+        parseInt(registrationFee) + parseInt(courseFee)
+      }`;
+      document.getElementById("rf").textContent = `$${registrationFee}`;
+      document.getElementById("cf").textContent = `$${courseFee}`;
+      document.getElementById("name").textContent = name;
+      document.getElementById("email").textContent = email;
+      document.getElementById("certification").textContent = certification;
+      tot = registrationFee + courseFee;
+
+      //TERMS & CONDITIONS BLOCK
+      termsCheckbox.addEventListener("change", function () {
+        if (this.checked) {
+          // Checkbox is checked
+          // Handle the action when terms are accepted
+        } else {
+          // Checkbox is not checked
+          // Handle the action when terms are not accepted
+        }
+      });
+
+      //HANDLING PAYMENT
+      const handlePayment = async () => {
+        try {
+          // console.log(tot);
+          const response = await fetch("http://localhost:5000/create-order", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              amount: tot, // Assuming price is defined somewhere in your code
+            }),
+          });
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const responseData = await response.json();
+          const approvalUrl = responseData.approvalUrl;
+          window.location.href = approvalUrl;
+        } catch (error) {
+          console.log("Error in payment", error.message);
+        }
+      };
+      payNowButton.addEventListener("click", handlePayment);
+
+      //DISCOUNT BUTTON
+      document
+        .getElementById("applyButton")
+        .addEventListener("click", async () => {
+          // Logic to handle applying the coupon
+          const scholarshipCode =
+            document.getElementById("scholarshipCode").value;
+          const response = await fetch(
+            "http://localhost:5000/validate-coupon",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                scholarshipCode: scholarshipCode,
+              }),
+            }
+          );
+          if (response.ok) {
+            const data = await response.json();
+            if (data.discount && data.expiresIn) {
+              console.log("Coupon is valid");
+              const currentTime = new Date();
+              const expiresIn = new Date(data.expiresIn.seconds * 1000);
+              if (currentTime < expiresIn) {
+                const discountedCourseFee = parseInt(courseFee) - data.discount;
+                document.getElementById(
+                  "dcf"
+                ).textContent = `$${discountedCourseFee}`;
+
+                document.getElementById("cf").classList.add("strikethrough");
+                couponMessage.textContent = "Coupon is Applied";
+
+                // Update total amount
+                tot = parseInt(registrationFee) + discountedCourseFee;
+                document.getElementById("tf").textContent = `$${tot}`;
+                const isCouponApplied = true;
+
+                if (isCouponApplied) {
+                  applyButton.textContent = "Applied";
+                  applyButton.classList.add("applied");
+                  applyButton.disabled = true;
+                }
+              } else {
+                couponMessage.textContent = "Coupon has expired";
+                tot = parseInt(registrationFee) + parseInt(courseFee);
+                document.getElementById("tf").textContent = `$${tot}`;
+              }
+            } else {
+              alert("Invalid coupon");
+            }
+          } else {
+            // Handle error if the response is not OK (e.g., display an error message)
+            couponMessage.textContent = "Invalid Coupon";
+
+            console.error("Failed to validate coupon:", response.statusText);
+          }
+        });
+    </script>
+  </body>
+</html>

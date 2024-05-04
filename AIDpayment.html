@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CalAi-ScholarShip Test</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div
+      id="banner"
+      class="border-b-2 flex border-black bg-white w-full justify-between px-4"
+    >
+      <div class="flex">
+        <img class="h-[80px]" src="Cal_ai_orign-removebg-preview.png" alt="" />
+        <p class="relative top-[-8px] left-[-20px] text-[55px] font-light">
+          &vert;
+        </p>
+        <h1
+          class="relative top-5 text-[#074D8D] text-[25px] font-bold md:text-[18px]"
+        >
+          California Artificial Intelligence Institute
+        </h1>
+      </div>
+
+      <div class="md:hidden">
+        <p class="mt-7 relative text-[1rem] text-[#074D8D] font-bold">
+          Email: Info@calai.org
+        </p>
+      </div>
+    </div>
+    <div
+      class="flex flex-col justify-center w-full items-center gap-5 mt-4 md:p-4"
+    >
+      <div class="text-center">
+        <h2 class="text-[2rem] font-semibold">Complete Your Registration!</h2>
+        <p>
+          Complete your CalAI® registration to personalize your AI journey with
+          tailored content ."
+        </p>
+        <br />
+        <br />
+        <h3 class="text-[1rem]">
+          Certified Artificial intelligence developer (CAID)
+        </h3>
+        <p class="font-semibold">$50.00 USD</p>
+      </div>
+      <div class="w-[500px] text-center p-4">
+        <div id="paypal-button-container"></div>
+
+        <!-- Include PayPal JavaScript SDK -->
+        <script src="https://www.paypal.com/sdk/js?client-id=Afy0DmAz8U6F_ockbxHb8Mw8OeAB6YAQqKsxa2s1ZFyK5VSDgRrMGUtc2OabS_w-Mpodu3HpuTvXudJi"></script>
+
+        <script>
+          // Render PayPal button
+          paypal
+            .Buttons({
+              createOrder: function (data, actions) {
+                return actions.order.create({
+                  purchase_units: [
+                    {
+                      amount: {
+                        value: "50.00", // Specify the payment amount
+                      },
+                    },
+                  ],
+                });
+              },
+              onApprove: function (data, actions) {
+                // Capture the funds
+                return actions.order.capture().then(function (details) {
+                  // Handle payment success
+                  alert(
+                    "Transaction completed by " + details.payer.name.given_name
+                  );
+                  // Redirect to a thank-you page or perform other actions
+                });
+              },
+              onCancel: function (data) {
+                // Handle payment cancellation
+                alert("Payment cancelled");
+              },
+            })
+            .render("#paypal-button-container");
+        </script>
+      </div>
+    </div>
+  </body>
+</html>
