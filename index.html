@@ -316,7 +316,7 @@
                     </div>
                     <div class="flex mt-4">
                       <button class="w-[225px] bg-white font-bold border-t-2 border-solid border-black lg:w-[480px] ">Know More</button>
-                      <button class="w-[225px] bg-blue-800 text-white font-bold p-2 lg:w-[480px]"><a href="./register_form/register.html">Apply Now</a></button>
+                      <button id="applyNow" class="w-[225px] bg-blue-800 text-white font-bold p-2 lg:w-[480px]">Apply Now</button>
                     </div>
 
                   </div>
@@ -335,7 +335,7 @@
                   </div>
                   <div class="flex mt-4 lg:w-full">
                     <button class="w-[225px] bg-white font-bold border-t-2 border-solid border-black lg:w-[480px]"><a href="AILeadership.html">Know More</a></button>
-                    <button class="w-[225px] bg-blue-800 text-white font-bold p-2 lg:w-[480px]" ><a href="./register_form/register.html">Apply Now</a></button>
+                    <button id="applyNow2" class="w-[225px] bg-blue-800 text-white font-bold p-2 lg:w-[480px]">Apply Now</button>
                   </div>
 
                 </div>
@@ -355,7 +355,7 @@
                   </div>
                   <div class="flex mt-4">
                     <button class="w-[225px] bg-white font-bold border-t-2 border-solid border-black lg:w-[480px]"><a href="AI-Lead.html">Know More</a></button>
-                    <button class="w-[225px] bg-blue-800 text-white font-bold p-2 lg:w-[480px]"><a href="./register_form/register.html">Apply Now</a></button>
+                    <button id="applyNow3" class="w-[225px] bg-blue-800 text-white font-bold p-2 lg:w-[480px]">Apply Now</button>
                   </div>
 
                 </div>
@@ -652,6 +652,32 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" integrity="sha512-Ic9xkERjyZ1xgJ5svx3y0u3xrvfT/uPkV99LBwe68xjy/mGtO+4eURHZBW2xW4SZbFrF1Tf090XqB+EVgXnVjw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="script.js"></script>
+<script>
+  // Function to handle button click
+  function handleApplyNowClick(event) {
+    event.preventDefault(); // Prevent default anchor behavior
+
+    // Check if user is signed in
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in, redirect to the given URL
+        window.location.href = "./register_form/register.html";
+      } else {
+        // User is not signed in, redirect to the signup page
+        window.location.href = "./login/login.html";
+      }
+    });
+  }
+  
+  // Add event listener to the button
+  const applyNowButton = document.getElementById('applyNow');
+  const applyNowButton2 = document.getElementById('applyNow2');
+  const applyNowButton3 = document.getElementById('applyNow3');
+
+  applyNowButton.addEventListener('click', handleApplyNowClick);
+  applyNowButton2.addEventListener('click', handleApplyNowClick);
+  applyNowButton3.addEventListener('click', handleApplyNowClick);
+</script>
 <script>
   // Firebase configuration
   const firebaseConfig = {

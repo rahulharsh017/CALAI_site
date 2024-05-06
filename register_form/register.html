@@ -15,119 +15,131 @@
     />
   </head>
   <body>
-    <div class="container">
-      <h2>Register</h2>
-      <form id="registration-form" action="review.html" method="GET">
-        <fieldset>
-          <legend>Certification</legend>
-          <div class="form-group">
-            <label for="certification">Select Program:</label>
-            <select
-              id="certification"
-              name="certification"
-              onchange="updatePrice()"
-              name="program"
-              required
-            >
-              <option value="" disabled selected>Select Program</option>
-              <option value="cert1">
-                Certified Artificial Intelligence Developer (CAID)
-              </option>
-              <option value="cert2">
-                Certified Artificial Intelligence Leader (CAIL)
-              </option>
-              <option value="cert3">
-                Certified Artificial Intelligence Manager (CAIM)
-              </option>
-              <!-- Options for certification -->
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="country"
-              >Course Price:
-              <span style="color: #cba135" id="priceLabel">$0.00</span>
-            </label>
-          </div>
-        </fieldset>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">
+        <img src="../Cal_ai_orign-removebg-preview.png" alt="Company Logo" />
 
-        <fieldset>
-          <legend>Personal Information</legend>
-          <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required />
-          </div>
-          <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required />
-          </div>
-          <div class="form-group">
-            <label for="phoneNumber">Phone Number:</label>
-            <div class="phone-number-input">
-              <!-- Input for mobile number -->
+        <span>California Artificial Intelligence Institute</span>
+      </div>
+    </nav>
+    <div class="main-content">
+      <div class="container">
+        <h2>Register</h2>
+        <form id="registration-form" action="review.html" method="GET">
+          <fieldset>
+            <legend>Certification</legend>
+            <div class="form-group">
+              <label for="certification">Select Program:</label>
+              <select
+                id="certification"
+                name="certification"
+                onchange="updatePrice()"
+                name="program"
+                required
+              >
+                <option value="" disabled selected>Select Program</option>
+                <option value="cert1">
+                  Certified Artificial Intelligence Developer (CAID)
+                </option>
+                <option value="cert2">
+                  Certified Artificial Intelligence Leader (CAIL)
+                </option>
+                <option value="cert3">
+                  Certified Artificial Intelligence Manager (CAIM)
+                </option>
+                <!-- Options for certification -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="country"
+                >Course Price:
+                <span style="color: #cba135" id="priceLabel">$0.00</span>
+              </label>
+            </div>
+          </fieldset>
 
+          <fieldset>
+            <legend>Personal Information</legend>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="phoneNumber">Phone Number:</label>
+              <div class="phone-number-input">
+                <!-- Input for mobile number -->
+
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="Enter your phone number"
+                  required
+                />
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Education</legend>
+            <div class="form-group">
+              <label for="qualification">Qualification:</label>
+              <select id="qualification" name="qualification" required>
+                <option value="">Select Qualification</option>
+                <option value="highschool">High School</option>
+                <option value="bachelor">Bachelor's Degree</option>
+                <option value="master">Master's Degree</option>
+                <option value="phd">Ph.D.</option>
+                <!-- Add more options as needed -->
+              </select>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Employment</legend>
+            <div class="form-group">
+              <label for="employment">Employment Status:</label>
+              <select id="employment" name="employment" required>
+                <option value="">Select Your Employment Status</option>
+                <option value="employed">Employed</option>
+                <option value="unemployed">Unemployed</option>
+                <option value="self-employed">Self-employed</option>
+                <option value="student">Student</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="work-experience"
+                >Total Work Experience (years):</label
+              >
               <input
-                type="tel"
-                id="phone"
-                name="phone"
-                placeholder="Enter your phone number"
+                type="number"
+                id="work-experience"
+                name="workExperience"
                 required
               />
             </div>
-          </div>
-        </fieldset>
 
-        <fieldset>
-          <legend>Education</legend>
-          <div class="form-group">
-            <label for="qualification">Qualification:</label>
-            <select id="qualification" name="qualification" required>
-              <option value="">Select Qualification</option>
-              <option value="highschool">High School</option>
-              <option value="bachelor">Bachelor's Degree</option>
-              <option value="master">Master's Degree</option>
-              <option value="phd">Ph.D.</option>
-              <!-- Add more options as needed -->
-            </select>
-          </div>
-        </fieldset>
+            <div class="form-group">
+              <label for="gegnation">Designation:</label>
+              <input type="text" id="designation" name="designation" required />
+            </div>
+            <div class="form-group">
+              <label for="linkedin">LinkedIn Profile:</label>
+              <input type="text" id="linkedin" name="linkedin" />
+            </div>
+          </fieldset>
 
-        <fieldset>
-          <legend>Employment</legend>
-          <div class="form-group">
-            <label for="employment">Employment Status:</label>
-            <select id="employment" name="employment" required>
-              <option value="">Select Your Employment Status</option>
-              <option value="employed">Employed</option>
-              <option value="unemployed">Unemployed</option>
-              <option value="self-employed">Self-employed</option>
-              <option value="student">Student</option>
-            </select>
+          <!-- Submit Button -->
+          <div class="form-group2">
+            <input type="submit" value="Register" />
           </div>
-          <div class="form-group">
-            <label for="work-experience">Total Work Experience (years):</label>
-            <input
-              type="number"
-              id="work-experience"
-              name="workExperience"
-              required
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="gegnation">Designation:</label>
-            <input type="text" id="designation" name="designation" required />
-          </div>
-          <div class="form-group">
-            <label for="linkedin">LinkedIn Profile:</label>
-            <input type="text" id="linkedin" name="linkedin" />
-          </div>
-        </fieldset>
-
-        <!-- Submit Button -->
-        <div class="form-group2">
-          <input type="submit" value="Register" />
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <script>
@@ -141,21 +153,17 @@
         .addEventListener("submit", async function (event) {
           event.preventDefault(); // Prevent form submission
 
-          // Collect form data
           const certification = document.getElementById("certification").value;
           const email = document.getElementById("email").value;
           const name = document.getElementById("name").value;
-          // Get other form field values here
+          const phone = document.getElementById("phone").value;
 
           try {
-            // Send a POST request to get course details
             const courseDetailsResponse = await fetch(
               "https://calai-site.onrender.com/getCourseDetails",
               {
                 method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ certificationId: certification }),
               }
             );
@@ -165,44 +173,21 @@
             }
 
             const courseDetailsData = await courseDetailsResponse.json();
-            // Extract relevant course details from courseDetailsData if needed
 
-            // Convert form data to JSON object
-            const formData = {};
-            new FormData(this).forEach((value, key) => {
-              formData[key] = value;
-            });
-            const linkedIn = document.getElementById("linkedin").value;
+            const queryParams = new URLSearchParams({
+              certification: courseDetailsData.certName,
+              name: name,
+              email: email,
+              courseFee: courseDetailsData.courseFee,
+              registrationFee: courseDetailsData.registrationFee,
+              country: countryCode,
+              contact: phone,
+            }).toString();
 
-            // Check if linkedIn field is not empty before setting it in Firestore
-            if (linkedIn.trim() !== "") {
-              formData.linkedIn = linkedIn;
-            }
-
-            // Send registration data to backend
-            const registrationResponse = await fetch(
-              "https://calai-site.onrender.com/register",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData),
-              }
-            );
-
-            if (!registrationResponse.ok) {
-              throw new Error("Failed to register");
-            } else {
-              console.log("Registration successful!");
-            }
-
-            // Redirect to review page with query parameters
-            const queryParams = `?certification=${courseDetailsData.certName}&name=${name}&email=${email}&courseFee=${courseDetailsData.courseFee}&registrationFee=${courseDetailsData.registrationFee}`;
-            window.location.href = `../review/review.html${queryParams}`;
+            window.location.href = `../review/review.html?${queryParams}`;
           } catch (error) {
             console.error("Error:", error.message);
-            // Handle error, display message to the user, etc.
+            // Handle error
           }
         });
     </script>
@@ -212,13 +197,13 @@
         let price = 0;
         switch (certification) {
           case "cert1":
-            price = 100; // Set the price for Certified Artificial Intelligence Developer
+            price = 699.0; // Set the price for Certified Artificial Intelligence Developer
             break;
           case "cert2":
-            price = 150.0; // Set the price for Certified Artificial Intelligence Leader
+            price = 999.0; // Set the price for Certified Artificial Intelligence Leader
             break;
           case "cert3":
-            price = 200.0; // Set the price for Certified Artificial Intelligence Manager
+            price = 499.0; // Set the price for Certified Artificial Intelligence Manager
             break;
           default:
             price = 0.0; // Default price if no option is selected

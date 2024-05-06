@@ -12,56 +12,68 @@
     <title>Review</title>
   </head>
   <body>
-    <div class="card">
-      <div class="container">
-        <h1>Review Your Selections</h1>
-        <div>
-          <p>
-            Selected Certification:
-            <span id="certification"></span>
-          </p>
-          <p>Your Name: <span id="name"></span></p>
-          <p>Your Email: <span id="email"></span></p>
-          <p>Registration fee: <span id="rf"></span></p>
-          <p id="course">
-            Course fee: <span id="cf"></span
-            ><span
-              style="color: rgb(1, 110, 122); font-weight: bold"
-              id="dcf"
-            ></span>
-          </p>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">
+        <img src="../Cal_ai_orign-removebg-preview.png" alt="Company Logo" />
+
+        <span>California Artificial Intelligence Institute</span>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <div class="card">
+        <div class="container">
+          <h1>Review Your Selections</h1>
+          <div>
+            <p>
+              Selected Certification:
+              <span id="certification"></span>
+            </p>
+            <p>Your Name: <span id="name"></span></p>
+            <p>Your Email: <span id="email"></span></p>
+            <p>Registration fee: <span id="rf"></span></p>
+            <p id="course">
+              Course fee: <span id="cf"></span
+              ><span
+                style="color: rgb(33, 190, 33); font-weight: bold"
+                id="dcf"
+              ></span>
+            </p>
+            <hr />
+            <p>Total fee: <span style="color: #cba135" id="tf"></span></p>
+          </div>
           <hr />
-          <p>Total fee: <span style="color: #cba135" id="tf"></span></p>
+          <div class="form-group" id="scholarshipCodeGroup">
+            <label for="scholarshipCode">Scholarship Code (if any):</label>
+            <input
+              type="text"
+              id="scholarshipCode"
+              name="scholarshipCode"
+              style="
+                border-radius: 8px;
+                background-color: #f0f0f0;
+                padding: 8px;
+              "
+            />
+            <button class="applyNowButton" id="applyButton">Apply</button>
+            <p id="couponMessage"></p>
+          </div>
+          <div class="form-group">
+            <input type="checkbox" id="termsCheckbox" />
+            <label for="termsCheckbox"
+              >I accept the <i>terms & conditions</i></label
+            >
+          </div>
+          <div class="form-group">
+            <input type="checkbox" id="registerOnlyCheckbox" />
+            <label for="registerOnlyCheckbox">I want to register only</label>
+          </div>
+          <div class="form-group2">
+            <button class="payNowButton" id="payNowButton">Pay Now</button>
+          </div>
+          <!-- PayPal button container -->
         </div>
-        <hr />
-        <div class="form-group" id="scholarshipCodeGroup">
-          <label for="scholarshipCode">Scholarship Code (if any):</label>
-          <input
-            type="text"
-            id="scholarshipCode"
-            name="scholarshipCode"
-            style="border-radius: 8px; background-color: #f0f0f0; padding: 8px"
-          />
-          <button class="applyNowButton" id="applyButton">Apply</button>
-          <p
-            style="color: red; text-align: center; font-style: italic"
-            id="couponMessage"
-          ></p>
-        </div>
-        <div class="form-group">
-          <input type="checkbox" id="termsCheckbox" />
-          <label for="termsCheckbox"
-            >I accept the <i>terms & conditions</i></label
-          >
-        </div>
-        <div class="form-group">
-          <input type="checkbox" id="registerOnlyCheckbox" />
-          <label for="registerOnlyCheckbox">I want to register only</label>
-        </div>
-        <div class="form-group2">
-          <button class="payNowButton" id="payNowButton">Pay Now</button>
-        </div>
-        <!-- PayPal button container -->
       </div>
     </div>
     <script src="https://www.paypal.com/sdk/js?client-id=Afy0DmAz8U6F_ockbxHb8Mw8OeAB6YAQqKsxa2s1ZFyK5VSDgRrMGUtc2OabS_w-Mpodu3HpuTvXudJi"></script>
@@ -124,7 +136,7 @@
       document.getElementById("name").textContent = name;
       document.getElementById("email").textContent = email;
       document.getElementById("certification").textContent = certification;
-      tot = registrationFee + courseFee;
+      tot = parseInt(registrationFee) + parseInt(courseFee);
 
       //TERMS & CONDITIONS BLOCK
       termsCheckbox.addEventListener("change", function () {
@@ -139,29 +151,40 @@
 
       //HANDLING PAYMENT
       const handlePayment = async () => {
-        try {
-          // console.log(tot);
-          const response = await fetch(
-            "https://calai-site.onrender.com/create-order",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                amount: tot, // Assuming price is defined somewhere in your code
-              }),
+        const termsCheckbox = document.getElementById("termsCheckbox");
+        if (!termsCheckbox.checked) {
+          couponMessage.classList.remove("applied");
+          couponMessage.classList.add("applied2");
+          couponMessage.textContent =
+            "Please accept the terms and conditions before proceeding.";
+          // alert("Please accept the terms and conditions before proceeding.");
+          event.preventDefault();
+        } else {
+          try {
+            // console.log(tot);
+            const response = await fetch(
+              "https://calai-site.onrender.com/create-order",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  amount: tot, // Assuming price is defined somewhere in your code
+                }),
+              }
+            );
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
             }
-          );
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
 
-          const responseData = await response.json();
-          const approvalUrl = responseData.approvalUrl;
-          window.location.href = approvalUrl;
-        } catch (error) {
-          console.log("Error in payment", error.message);
+            const responseData = await response.json();
+            const approvalUrl = responseData.approvalUrl;
+            window.location.href = approvalUrl;
+          } catch (error) {
+            alert("Can't Process your Payment. Please try again later");
+            console.log("Error in payment", error.message);
+          }
         }
       };
       payNowButton.addEventListener("click", handlePayment);
@@ -198,6 +221,8 @@
                 ).textContent = `$${discountedCourseFee}`;
 
                 document.getElementById("cf").classList.add("strikethrough");
+                couponMessage.classList.remove("applied2");
+                couponMessage.classList.add("applied");
                 couponMessage.textContent = "Coupon is Applied";
 
                 // Update total amount
@@ -211,6 +236,8 @@
                   applyButton.disabled = true;
                 }
               } else {
+                couponMessage.classList.remove("applied");
+                couponMessage.classList.add("applied2");
                 couponMessage.textContent = "Coupon has expired";
                 tot = parseInt(registrationFee) + parseInt(courseFee);
                 document.getElementById("tf").textContent = `$${tot}`;
@@ -220,6 +247,8 @@
             }
           } else {
             // Handle error if the response is not OK (e.g., display an error message)
+            couponMessage.classList.remove("applied");
+            couponMessage.classList.add("applied2");
             couponMessage.textContent = "Invalid Coupon";
 
             console.error("Failed to validate coupon:", response.statusText);

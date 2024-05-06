@@ -18,6 +18,38 @@ body {
         background-position: 0% 50%;
     }
 }
+/* Navbar styles */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.logo img {
+  height: 80px; /* Adjust as needed */
+  margin-right: 10px;
+}
+
+.logo span {
+  color: #192081;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+/* Main content styles */
+.main-content {
+  padding-top: 60px; /* Adjust according to navbar height */
+}
   .container {
     max-width: 800px; /* Increased form width */
     margin: 50px auto;
@@ -30,7 +62,7 @@ body {
   h2 {
     margin-bottom: 20px;
     text-align: center;
-    color: #007bff;
+    color: #3055cc;
     font-size: 50px;
   }
   
