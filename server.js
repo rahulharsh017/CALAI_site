@@ -75,7 +75,7 @@ app.post("/create-order", async (req, res) => {
       },
     ],
     application_context: {
-      brand_name: "PRACTICE INC",
+      brand_name: "CalAI",
       locale: "en-US",
       return_url: "https://calai-site.vercel.app/capture/success.html", // This is the returnUrl
       cancel_url: "https://calai-site.vercel.app/capture/cancel.html", // Your cancel URL
