@@ -137,7 +137,7 @@ app.post("/capture-order", async (req, res) => {
 
     res.json({
       message: "Order captured successfully",
-      transactionId: orderId,
+      transactionId: response.data.id,
     });
   } catch (error) {
     console.error("Error capturing order:", error.message);
