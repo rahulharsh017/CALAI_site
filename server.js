@@ -186,7 +186,7 @@ app.post("/order-cancel", async (req, res) => {
     await cancelRef.set(cancelData);
     console.log("payment canceled");
   } catch (error) {
-    console.log("Error in canceling order and ");
+    console.log("Error in canceling order", error);
   }
 });
 
