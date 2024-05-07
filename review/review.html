@@ -95,7 +95,8 @@
       const certification = urlParams.get("certification");
       const name = urlParams.get("name");
       const email = urlParams.get("email");
-      const employed = urlParams.get("employed");
+      const phone = urlParams.get("contact");
+      const countryCode = urlParams.get("country");
       const courseFee = urlParams.get("courseFee");
       const registrationFee = urlParams.get("registrationFee");
 
@@ -165,6 +166,44 @@
           tncMessage.textContent = "";
           try {
             // console.log(tot);
+            const url = "http://localhost:5000/register"; // Replace with your backend endpoint
+
+            const requestBody = {
+              name: name,
+              email: email,
+              contact: phone,
+              country: countryCode,
+              courseFee: courseFee,
+              registrationFee: registrationFee,
+              certification: certification,
+            };
+
+            fetch(url, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(requestBody),
+            })
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Network response was not ok");
+                  console.log("error");
+                }
+
+                return response.json();
+              })
+              .then((data) => {
+                console.log("Data sent to backend:", data);
+                // Handle response from backend if needed
+              })
+              .catch((error) => {
+                console.error(
+                  "There was a problem with the fetch operation:",
+                  error
+                );
+                // Handle errors
+              });
             const response = await fetch(
               "https://calai-site.onrender.com/create-order",
               {

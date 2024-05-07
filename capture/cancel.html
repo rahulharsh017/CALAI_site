@@ -16,18 +16,48 @@
   <body>
     <div class="flex justify-center items-center h-screen">
       <div class="bg-white shadow-md rounded-md p-8 text-center max-w-md">
-        <h1 class="text-3xl font-bold text-red-500 mb-4">Payment Failed</h1>
-        <p class="text-lg mb-6">
-          We're sorry, your payment could not be processed. The amount will be
-          refunded in 2-3 business days (If Deducted).
-        </p>
+        <h1 class="text-3xl font-bold text-red-500 mb-4">Payment Canceled</h1>
+        <p class="text-lg mb-6">Payement is canceled from your side</p>
         <a
-          href="../review/review.html"
+          href="../register_form/register.html"
           class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out"
         >
-          Back to Review Page
+          Back to Register Page
         </a>
       </div>
     </div>
+    <script>
+      // Function to capture the order
+      const orderCanceled = async () => {
+        try {
+          const urlParams = new URLSearchParams(window.location.search);
+          const cancelId = urlParams.get("token");
+          console.log(cancelId);
+          if (!cancelId) {
+            console.error("Order ID not found in URL.");
+            return;
+          }
+          // Capture the order by sending a POST request to your backend endpoint
+          const captureResponse = await fetch(
+            "http://localhost:5000/order-cancel",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                token: cancelId,
+              }),
+            }
+          );
+          console.log("Order Canceled");
+        } catch (error) {
+          console.error("Internal server Error", error.message);
+        }
+      };
+
+      // Call the function when the page loads
+      window.onload = orderCanceled;
+    </script>
   </body>
 </html>

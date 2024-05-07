@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Use cors middleware to handle CORS
 app.use(cors());
-
+let userEmail;
 const port = process.env.PORT || 5000;
 
 // Initialize Firebase
@@ -126,23 +126,67 @@ app.post("/capture-order", async (req, res) => {
     const response = await axios.post(url, data, { headers });
     console.log("Order Captured:", response.data);
 
-    const orderData = {
-      orderId: response.data.id,
-      status: response.data.status,
-      links: response.data.links,
-    };
-
     // Store only the necessary order data in Firestore
-    const orderRef = db.collection("orders").doc(orderId);
-    await orderRef.set(orderData);
+    const orderRef = db
+      .collection("after_transaction")
+      .doc(userEmail)
+      .collection("successfulPayments")
+      .doc(orderId);
+    await orderRef.set(response.data);
+    console.log("Order Captured Successfully");
 
-    res.json({ message: "Order captured successfully" });
+    res.json({
+      message: "Order captured successfully",
+      transactionId: orderId,
+    });
   } catch (error) {
     console.error("Error capturing order:", error.message);
     console.error("Error response:", error.response.data); // Log detailed error response
+
+    // Handle payment failure
+    const failureData = {
+      orderId: orderId,
+      error: error.message, // Or use error.response.data to capture detailed error information
+      timestamp: new Date(),
+      resp: response.data,
+    };
+
+    // Ensure that the user is authenticated and get their email
+
+    if (userEmail) {
+      // Store the failure data in Firestore under the user's email
+      const failureRef = db
+        .collection("after_transaction")
+        .doc(userEmail)
+        .collection("failed_payments")
+        .doc();
+      await failureRef.set(failureData);
+    }
+
     res
       .status(error.response.status || 500)
-      .json({ error: "Failed to capture order" });
+      .json({ error: "Failed to capture order", details: error.response.data });
+  }
+});
+
+//CANCELING ORDER
+app.post("/order-cancel", async (req, res) => {
+  const { token } = req.body;
+  const cancelData = {
+    tokenId: token,
+    timestamp: new Date(),
+    message: "Order Canceled",
+  };
+  try {
+    const cancelRef = db
+      .collection("after_transaction")
+      .doc(userEmail)
+      .collection("canceledPayments")
+      .doc(token);
+    await cancelRef.set(cancelData);
+    console.log("payment canceled");
+  } catch (error) {
+    console.log("Error in canceling order and ");
   }
 });
 
@@ -202,32 +246,38 @@ app.post("/register", async (req, res) => {
     const {
       name,
       email,
-      phone,
-      linkedIn,
-      designation,
-      workExperience,
-      employment,
-      qualification,
-      program,
+      contact,
+      country,
+      courseFee,
+      registrationFee,
+      certification,
     } = req.body;
 
-    // Create a reference to the Firestore document
-    const userRef = db.collection("registers").doc(email);
+    // Ensure that the user is authenticated and get their email
+    // const userEmail = firebase.auth().currentUser;
+    userEmail = email;
+    // Create a reference to the Firestore collection for the user's data
+    const userCollectionRef = db
+      .collection("before_transaction")
+      .doc(email)
+      .collection("registrationData");
+
+    // Generate a unique ID for the registration data document
+    const registrationDataRef = userCollectionRef.doc();
 
     // Set data in the Firestore document
-    await userRef.set({
+    await registrationDataRef.set({
       name: name,
       email: email,
-      phone: phone,
-      workExperience: workExperience,
-      designation: designation,
-      employmentStatus: employment,
-      qualification: qualification,
-      // course: program,
+      contact: contact,
+      country: country,
+      courseFee: courseFee,
+      registrationFee: registrationFee,
+      certification: certification,
     });
 
     // Log a success message
-    console.log("Registration successful:", userRef.id);
+    console.log("Registration successful for user:", email);
 
     // Send a success response to the client
     res.status(200).send("Registration successful");
