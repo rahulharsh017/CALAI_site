@@ -10,21 +10,62 @@
       rel="stylesheet"
     />
     <style>
-      /* Optional: You can add additional custom styles here */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .success-container {
+        max-width: 400px;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+        text-align: center;
+      }
+      .success-image {
+        width: 100px;
+        margin: 0 auto 20px;
+      }
+      .success-heading {
+        color: rgb(165, 18, 18);
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+      .success-message {
+        font-size: 16px;
+        color: #6c757d;
+        margin-bottom: 20px;
+      }
+      .continue-shopping {
+        display: inline-block;
+        text-decoration: none;
+        background-color: #bc1414;
+        color: #ffffff;
+        padding: 10px 20px;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+      }
+      .continue-shopping:hover {
+        background-color: #900707;
+      }
     </style>
   </head>
   <body>
-    <div class="flex justify-center items-center h-screen">
-      <div class="bg-white shadow-md rounded-md p-8 text-center max-w-md">
-        <h1 class="text-3xl font-bold text-red-500 mb-4">Payment Canceled</h1>
-        <p class="text-lg mb-6">Payement is canceled from your side</p>
-        <a
-          href="../register_form/register.html"
-          class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out"
-        >
-          Back to Register Page
-        </a>
-      </div>
+    <div class="success-container">
+      <img
+        src="../images/9079476.png"
+        alt="cancel Icon"
+        class="success-image"
+      />
+      <h1 class="success-heading">Payment Canceled</h1>
+      <p class="success-message">You Canceled the Payment</p>
+      <a href="../register_form/register.html" class="continue-shopping"
+        >Go to Registration Page</a
+      >
     </div>
     <script>
       // Function to capture the order

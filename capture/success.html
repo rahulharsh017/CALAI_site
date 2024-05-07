@@ -9,20 +9,64 @@
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .success-container {
+        max-width: 400px;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+        text-align: center;
+      }
+      .success-image {
+        width: 100px;
+        margin: 0 auto 20px;
+      }
+      .success-heading {
+        color: #28a745;
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+      .success-message {
+        font-size: 16px;
+        color: #6c757d;
+        margin-bottom: 20px;
+      }
+      .continue-shopping {
+        display: inline-block;
+        text-decoration: none;
+        background-color: #0fa14c;
+        color: #ffffff;
+        padding: 10px 20px;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+      }
+      .continue-shopping:hover {
+        background-color: #097144;
+      }
+    </style>
   </head>
   <body>
-    <div class="flex justify-center items-center h-screen">
-      <div class="bg-white shadow-md rounded-md p-8 text-center max-w-md">
-        <h1 class="text-3xl font-bold text-green-500 mb-4">Payment Success</h1>
-        <p class="text-lg mb-6">Your Payment is Completed.</p>
-        <p class="text-lg mb-6">Thank you for your purchase.</p>
-        <a
-          href="../index.html"
-          class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out"
-        >
-          Continue to Home Page
-        </a>
-      </div>
+    <div class="success-container">
+      <img
+        src="../images/136900587_5e2c5918-4df3-48d9-988a-8af4d95c2606.jpg"
+        alt="Success Icon"
+        class="success-image"
+      />
+      <h1 class="success-heading">Payment Successful</h1>
+      <p class="success-message">
+        Thank you for your payment. Your transaction was successful
+      </p>
+      <p class="success-message" id="trans"></p>
+      <a href="../index.html" class="continue-shopping">Go to Home Page</a>
     </div>
     <script>
       // Function to capture the order
@@ -53,6 +97,9 @@
 
           if (captureResponse.ok) {
             console.log("Order Captured");
+            document.getElementById(
+              "trans"
+            ).innerText = `transaction id: ${captureResponse.transactionId}`;
             alert("Your payment has been successful");
           } else {
             console.error("Failed to capture order");
