@@ -28,7 +28,7 @@
             </div>
             <input type="submit" value="Login" class="btn solid" />
 
-            <p class="social-text">Or Sign in with social platforms</p>
+            <p class="social-text">OR</p>
             <button
               type="button"
               id="google-signin-btn"
@@ -60,10 +60,7 @@
         <div class="panel left-panel">
           <div class="content">
             <h3>New here?</h3>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio
-              minus natus est.
-            </p>
+            <p>Click below to Register</p>
             <button class="btn transparent" id="sign-up-btn">Sign Up</button>
           </div>
           <img src="../images/login.svg" class="image" alt="register images" />
@@ -72,10 +69,7 @@
         <div class="panel right-panel">
           <div class="content">
             <h3>One of us?</h3>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio
-              minus natus est.
-            </p>
+            <p>Click below to Login</p>
             <button class="btn transparent" id="sign-in-btn">Sign In</button>
           </div>
           <img src="../images/register.svg" class="image" alt="login image" />
@@ -86,6 +80,9 @@
     <!-- login.html -->
 
     <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const loc = urlParams.get("location");
+      console.log(loc);
       const firebaseConfig = {
         // Your Firebase config object
         apiKey: "AIzaSyDPze9CSiP1l4AfUNFHHJBiGTiPUs_i5qI",
@@ -116,7 +113,8 @@
                 displayName: email,
               });
               alert("Login successful!");
-              window.location.href = "../index.html";
+
+              window.location.href = `${loc}`;
             } catch (error) {
               alert("Invalid Credentials");
             }
@@ -145,7 +143,7 @@
               // Signup successful, log in the user automatically
               alert("Signup successful! Logging in...");
               // Redirect or perform other actions as needed
-              window.location.href = "../index.html";
+              window.location.href = `${loc}`;
             } catch (error) {
               // If signup fails, display error message
               alert(error.message);
@@ -174,7 +172,7 @@
                     // Display success message and redirect to index page
                     alert("Login Successful");
                     console.log("Google sign-in successful:", result);
-                    window.location.href = "../index.html";
+                    window.location.href = `${loc}`;
                   })
                   .catch((error) => {
                     // Handle errors if the profile update fails

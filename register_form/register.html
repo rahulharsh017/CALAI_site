@@ -18,9 +18,12 @@
     <!-- Navbar -->
     <nav class="navbar">
       <div class="logo">
-        <img src="../Cal_ai_orign-removebg-preview.png" alt="Company Logo" />
-
-        <span>California Artificial Intelligence Institute</span>
+        <a href="../index.html" style="text-decoration: none">
+          <img src="../Cal_ai_orign-removebg-preview.png" alt="Company Logo" />
+        </a>
+        <a href="../index.html" style="text-decoration: none"
+          ><span>California Artificial Intelligence Institute</span></a
+        >
       </div>
     </nav>
     <div class="main-content">
@@ -30,7 +33,9 @@
           <fieldset>
             <legend>Certification</legend>
             <div class="form-group">
-              <label for="certification">Select Program:</label>
+              <label for="certification"
+                >Select Program: <span style="color: red">*</span></label
+              >
               <select
                 id="certification"
                 name="certification"
@@ -62,15 +67,19 @@
           <fieldset>
             <legend>Personal Information</legend>
             <div class="form-group">
-              <label for="email">Email:</label>
+              <label for="email"
+                >Email: <span style="color: red">*</span></label
+              >
               <input type="email" id="email" name="email" required />
             </div>
             <div class="form-group">
-              <label for="name">Name:</label>
+              <label for="name">Name: <span style="color: red">*</span></label>
               <input type="text" id="name" name="name" required />
             </div>
             <div class="form-group">
-              <label for="phoneNumber">Phone Number:</label>
+              <label for="phoneNumber"
+                >Phone Number: <span style="color: red">*</span></label
+              >
               <div class="phone-number-input">
                 <!-- Input for mobile number -->
 
@@ -88,7 +97,9 @@
           <fieldset>
             <legend>Education</legend>
             <div class="form-group">
-              <label for="qualification">Qualification:</label>
+              <label for="qualification"
+                >Qualification: <span style="color: red">*</span></label
+              >
               <select id="qualification" name="qualification" required>
                 <option value="">Select Qualification</option>
                 <option value="highschool">High School</option>
@@ -103,7 +114,9 @@
           <fieldset>
             <legend>Employment</legend>
             <div class="form-group">
-              <label for="employment">Employment Status:</label>
+              <label for="employment"
+                >Employment Status: <span style="color: red">*</span></label
+              >
               <select id="employment" name="employment" required>
                 <option value="">Select Your Employment Status</option>
                 <option value="employed">Employed</option>
@@ -114,7 +127,8 @@
             </div>
             <div class="form-group">
               <label for="work-experience"
-                >Total Work Experience (years):</label
+                >Total Work Experience (years):
+                <span style="color: red">*</span></label
               >
               <input
                 type="number"
@@ -125,7 +139,9 @@
             </div>
 
             <div class="form-group">
-              <label for="gegnation">Designation:</label>
+              <label for="gegnation"
+                >Designation: <span style="color: red">*</span></label
+              >
               <input type="text" id="designation" name="designation" required />
             </div>
             <div class="form-group">

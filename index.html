@@ -26,7 +26,8 @@
           </div>
          
           <div>
-            <button id="authButton" class="bg-black mt-3 px-4 py-2  text-white rounded-md">Login</button>
+            <button id="authButton" class="bg-blue-800 mt-3 px-4 py-2  text-white rounded-md">Login</button>
+            <!-- <button id="authButton" class="w-[225px] bg-blue-800 text-white font-bold p-2 lg:w-[480px]">Login</button> -->
             <!-- <span id="emailDisplay" class="mt-7 relative text-[1rem] text-[#074D8D] font-bold md:mt-5 md:text-[14px]"></span> -->
           </div>
           
@@ -664,7 +665,7 @@
         window.location.href = "./register_form/register.html";
       } else {
         // User is not signed in, redirect to the signup page
-        window.location.href = "./login/login.html";
+        window.location.href = "./login/login.html?location=../register_form/register.html";
       }
     });
   }
@@ -712,7 +713,7 @@
       });
     } else {
       // User is signed out, so redirect to login page
-      window.location.href = "./login/login.html";
+      window.location.href = "./login/login.html?location=../index.html";
     }
   });
 
