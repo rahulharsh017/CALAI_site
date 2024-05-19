@@ -533,7 +533,7 @@
 </ul>
           </div>
           
-          <button class="mt-4 ml-7 bg-[#074D8D] text-white p-2 text-lg font-bold hover:bg-blue-500"><a href="AIDform.html">APPLY NOW</a></button>
+          <button id="applyNow" class="mt-4 ml-7 bg-[#074D8D] text-white p-2 text-lg font-bold hover:bg-blue-500">APPLY NOW</button>
           <div class="bg-[#e7e7e7] mx-4 relative mt-4 p-4">
 <h1 class="text-2xl font-bold">Program Fee:$699 Limited Slots available for CalAI Sholarship Program.Hurry up and <a class="text-blue-700" href="Starttest.html">Apply Now</a></h1>
           </div>
@@ -741,7 +741,80 @@
         </footer>
       
 </body>
+<script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-auth.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" integrity="sha512-Ic9xkERjyZ1xgJ5svx3y0u3xrvfT/uPkV99LBwe68xjy/mGtO+4eURHZBW2xW4SZbFrF1Tf090XqB+EVgXnVjw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="script.js"></script>
+<script>
+  // Function to handle button click
+  function handleApplyNowClick(event) {
+    event.preventDefault(); // Prevent default anchor behavior
+
+    // Check if user is signed in
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in, redirect to the given URL
+        window.location.href = "./register_form/register.html";
+      } else {
+        // User is not signed in, redirect to the signup page
+        window.location.href = "./login/login.html?location=../register_form/register.html";
+      }
+    });
+  }  
+  // Add event listener to the button
+  const applyNowButton = document.getElementById('applyNow');
+  applyNowButton.addEventListener('click', handleApplyNowClick);
+</script>
+<script>
+  // Firebase configuration
+  const firebaseConfig = {
+    // Your Firebase config object
+    apiKey: "AIzaSyDPze9CSiP1l4AfUNFHHJBiGTiPUs_i5qI",
+  authDomain: "calaisite.firebaseapp.com",
+  projectId: "calaisite",
+  storageBucket: "calaisite.appspot.com",
+  messagingSenderId: "137219193547",
+  appId: "1:137219193547:web:6961a289776640ea47794e",
+  measurementId: "G-M0B2Q3JX9V",
+    databaseURL: "https://calaisite-default-rtdb.firebaseio.com/",
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  const authButton = document.getElementById("authButton");
+  const emailDisplay = document.getElementById("emailDisplay");
+
+  // Add event listener to the auth button
+  authButton.addEventListener("click", () => {
+    console.log("in process");
+    const user = firebase.auth().currentUser;
+    console.log(user);
+    if (user) {
+      // User is signed in, so sign out
+      firebase.auth().signOut().then(() => {
+        console.log("User signed out successfully");
+      }).catch((error) => {
+        console.error("Error signing out:", error);
+      });
+    } else {
+      // User is signed out, so redirect to login page
+      window.location.href = "./login/login.html?location=../index.html";
+    }
+  });
+
+  // Add authentication state listener
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      // User is signed in
+      authButton.textContent = "Logout";
+      emailDisplay.textContent = `User: ${user.displayName}`;
+    } else {
+      // User is signed out
+      authButton.textContent = "Login";
+      emailDisplay.textContent = "";
+    }
+  });
+</script>
 </html>
