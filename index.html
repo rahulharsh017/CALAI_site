@@ -1,6 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <style>
+    #main {
+      width: 100%;
+    }
+
+    #page1 section {
+      position: relative;
+      width: 100%;
+      background-image: url('./banner.svg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 62vh;
+    }
+
+    .content-container {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin: 16px; /* Adjust margins as needed */
+      margin-right: 150px;
+      padding: 24px;
+      display: none;
+    }
+
+    .content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center content horizontally */
+      gap: 16px;
+      text-align: center; /* Center text */
+    }
+
+    .content h2 {
+      font-size: 20px;
+      color: white;
+      font-weight: bold;
+      margin-bottom: 5px; /* Add space below the h2 */
+    }
+
+
+    .buttons {
+      display: flex;
+      gap: 16px;
+      text-align: center;
+      margin: 0 24px;
+    }
+
+    .buttons a {
+      display: block;
+      width: 250px;
+      border-radius: 4px;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: bolder;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-decoration: none;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .buttons .start-test {
+      background-color: #e11d48;
+      color: white;
+    }
+
+    .buttons .start-test:hover {
+      background-color: #be123c;
+    }
+
+    .buttons .schedule-later {
+      background-color: white;
+      color: #e11d48;
+    }
+
+    .buttons .schedule-later:hover {
+      color: #be123c;
+    }
+
+    @media (min-width: 768px) {
+      .content-container {
+        display: block;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .content {
+        padding-left: 40vw;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .content {
+        padding-left: 45vw;
+      }
+    }
+
+    @media (min-width: 1920px) {
+      .content {
+        padding-left: 50vw;
+      }
+    }
+
+    @media (max-width: 767px) {
+      #page1 section {
+        height: 22vh; /* Adjust height for smaller screens */
+      }
+      .content {
+        margin-top: 25vh; /* Adjust top margin for smaller screens */
+        padding-left: 10vw; /* Adjust padding for smaller screens */
+      }
+      .buttons {
+        flex-direction: column; /* Stack buttons vertically on small screens */
+        margin: 0;
+      }
+      .buttons a {
+        width: auto;
+        max-width: 90%; /* Adjust button width for smaller screens */
+        padding: 12px 16px;
+        font-size: 14px; /* Adjust font size for smaller screens */
+      }
+    }
+  </style>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -58,8 +181,8 @@
             <a href="index.html">
             <img class="h-[80px]" src="Cal_ai_orign-removebg-preview.png" alt="CalAI-logo">
           </a>
-            <p class="relative mt-[-5px] left-[-20px] text-[50px]  font-light text-[#074D8D]"><a href="index.html">&vert;</a></p>
-            <h1 class = "relative top-5 text-[#074D8D] text-[25px] font-bold md:text-[14px] "><a href="index.html">California Artificial Intelligence Institute</a></h1>
+          <p class="relative top-[-8px] left-[-20px] text-[55px] font-light text-[#192081]"><a href="index.html">&vert;</a></p>
+            <h1 class = "relative top-5 text-[#192081] text-[25px] font-bold md:text-[14px] "><a href="index.html">California Artificial Intelligence Institute</a></h1>
           </div>
          
           <div>
@@ -232,53 +355,21 @@
             </div>
       </div>
  
-        <div class="" id="main">
-          <div id="page1">
-            <!--
-  Heads up! 👋
-  
-  This component comes with some `rtl` classes. Please remove them if they are not needed in your project.
-  -->
-  
-  <section
-  class="relative bg-[url('./banner.svg')] w-full bg-cover bg-center bg-no-repeat  md:h-[150px] "
-  >
-
-  
-  <div
-  class="relative mx-auto  max-w-screen-xl py-6 md:hidden  "
-  >
-
-  
-  
-  <div class="relative mt-[45vh] pl-[48vw] 3xl:pl-[58vw] w-full flex flex-col gap-4 ">
-
-    <h2 class="text-center text-[20px] text-white font-bold mt-8">Offer Valid Till 15th June</h2>
-
-    <div class="flex  gap-4 text-center mx-12 ">
-      <a
-    href="Starttest.html"
-    class="block w-[300px] rounded bg-rose-600 px-12 py-3 text-lg font-medium text-white shadow hover:bg-rose-700 focus:outline-none focus:ring active:bg-rose-500 "
-  >
-    Start Test
-  </a>
-  
-  <a
-    href="Schedulelater.html"
-    class="block w-[280px] rounded bg-white px-12 py-3 text-lg font-medium text-rose-600 shadow hover:text-rose-700 focus:outline-none focus:ring active:text-rose-500"
-  >
-    Schedule Later
-  </a>
-    </div>
-  
-  
-  </div>
-  </div>
-</section>
-  </div>
-  
- 
+      <div id="main">
+        <div id="page1">
+          <section>
+            <div class="content-container">
+              <div class="content">
+                <h2>Offer Valid Till 15th June</h2>
+                <div class="buttons">
+                  <a href="Starttest.html" class="start-test">Start Test</a>
+                  <a href="Schedulelater.html" class="schedule-later">Schedule Later</a>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
+      </div>
             <div id="page2">
               
                 <h1 class="text-[28px] font-bold text-[#074D8D] p-5 mx-8">About CalAI
