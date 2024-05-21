@@ -23,8 +23,15 @@
         padding: 20px;
         background-color: #ffffff;
         border-radius: 8px;
-        /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
         text-align: center;
+        display: none; /* Initially hidden */
+      }
+      .loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+        color: #28a745;
       }
       .success-image {
         width: 100px;
@@ -55,7 +62,8 @@
     </style>
   </head>
   <body>
-    <div class="success-container">
+    <div class="loading" id="loading">Loading...</div>
+    <div class="success-container" id="success-container">
       <img
         src="../images/136900587_5e2c5918-4df3-48d9-988a-8af4d95c2606.jpg"
         alt="Success Icon"
@@ -63,7 +71,7 @@
       />
       <h1 class="success-heading">Payment Successful</h1>
       <p class="success-message">
-        Thank you for your payment. Your transaction was successful
+        Thank you for your payment. Your transaction was successful.
       </p>
       <p class="success-message" id="trans"></p>
       <a href="../index.html" class="continue-shopping">Go to Home Page</a>
@@ -96,11 +104,17 @@
           );
 
           if (captureResponse.ok) {
+            const responseData = await captureResponse.json(); // Assuming the response contains JSON data
             console.log("Order Captured");
             document.getElementById(
               "trans"
-            ).innerText = `transaction id: ${captureResponse.transactionId}`;
+            ).innerText = `Transaction ID: ${responseData.transactionId}`;
             alert("Your payment has been successful");
+
+            // Show success container and hide loading
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("success-container").style.display =
+              "block";
           } else {
             console.error("Failed to capture order");
             // Handle the error as needed
