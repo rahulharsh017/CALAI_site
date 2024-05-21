@@ -77,8 +77,8 @@ app.post("/create-order", async (req, res) => {
     application_context: {
       brand_name: "CalAI",
       locale: "en-US",
-      return_url: "https://calai-site.vercel.app/capture/success.html", // This is the returnUrl
-      cancel_url: "https://calai-site.vercel.app/capture/cancel.html", // Your cancel URL
+      return_url: "https://calai.org/capture/success.html", // This is the returnUrl
+      cancel_url: "https://calai.org/capture/cancel.html", // Your cancel URL
     },
   };
   const accessToken = await generateToken();
@@ -99,7 +99,7 @@ app.post("/create-order", async (req, res) => {
       res.status(500).json({ error: "Failed to get PayPal redirect URL" });
     }
   } catch (error) {
-    // console.log(error.message);
+    console.log(error.message);
   }
 });
 
