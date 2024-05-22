@@ -77,8 +77,8 @@ app.post("/create-order", async (req, res) => {
     application_context: {
       brand_name: "CalAI",
       locale: "en-US",
-      return_url: "http://127.0.0.1:5500/capture/success.html", // This is the returnUrl
-      cancel_url: "http://127.0.0.1:5500/capture/cancel.html", // Your cancel URL
+      return_url: "https://calai.org/capture/success.html", // This is the returnUrl
+      cancel_url: "https://calai.org/capture/cancel.html", // Your cancel URL
     },
   };
   const accessToken = await generateToken();
