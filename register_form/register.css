@@ -223,6 +223,32 @@ select {
     height: auto;
   }
 
+  .hidden { display: none; }
+  .loading-overlay {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .loading-message { 
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background-color: rgba(0, 0, 0, 0.75); 
+    color: white; 
+    padding: 20px; 
+    border-radius: 5px; 
+    z-index: 1000; 
+  }
+
   /* For screens smaller than 768px (typical mobile devices) */
 @media screen and (max-width: 768px) {
   body {

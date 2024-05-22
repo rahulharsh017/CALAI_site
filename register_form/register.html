@@ -15,6 +15,9 @@
     />
   </head>
   <body>
+    <div id="loadingMessage" class="hidden loading-message">
+      Generating your Review, please wait...
+    </div>
     <!-- Navbar -->
     <nav class="navbar">
       <div class="logo">
@@ -168,7 +171,7 @@
         .getElementById("registration-form")
         .addEventListener("submit", async function (event) {
           event.preventDefault(); // Prevent form submission
-
+          loadingMessage.classList.remove("hidden");
           const certification = document.getElementById("certification").value;
           const email = document.getElementById("email").value;
           const name = document.getElementById("name").value;

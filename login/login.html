@@ -112,7 +112,7 @@
               await userCredential.user.updateProfile({
                 displayName: email,
               });
-              alert("Login successful!");
+              // alert("Login successful!");
 
               window.location.href = `${loc}`;
             } catch (error) {
@@ -141,7 +141,7 @@
               });
 
               // Signup successful, log in the user automatically
-              alert("Signup successful! Logging in...");
+              // alert("Signup successful! Logging in...");
               // Redirect or perform other actions as needed
               window.location.href = `${loc}`;
             } catch (error) {
@@ -170,7 +170,7 @@
                   })
                   .then(() => {
                     // Display success message and redirect to index page
-                    alert("Login Successful");
+                    // alert("Login Successful");
                     console.log("Google sign-in successful:", result);
                     window.location.href = `${loc}`;
                   })
