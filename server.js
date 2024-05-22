@@ -289,7 +289,7 @@ app.post("/register", async (req, res) => {
 
 //SERVER CHECK
 app.get("/", async (req, res) => {
-  res.send("Hello!! World");
+  res.send("Hello!! World i am safe");
 });
 // Start server
 app.listen(port, () => {
