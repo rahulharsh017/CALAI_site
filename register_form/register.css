@@ -53,17 +53,18 @@ body {
   .container {
     max-width: 800px; /* Increased form width */
     margin: 50px auto;
-    padding: 30px;
+    padding: 20px;
     background-color: #ffffff; /* Same as background color */
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   }
   
   h2 {
-    margin-bottom: 20px;
-    text-align: center;
-    color: #192081;
-    font-size: 50px;
+    margin-bottom: 20px; /* Keep margin-bottom as it is */
+  margin-top: 10px; /* Adjust margin-top to shift the heading upwards */
+  text-align: center;
+  color: #192081;
+  font-size: 50px;
   }
   
   fieldset {
