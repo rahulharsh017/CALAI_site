@@ -132,6 +132,16 @@
 
             try {
               // Create user with email and password using Firebase Auth
+              const emailData = {
+                email: email,
+              };
+              await fetch("http://localhost:5000/send_welcome_email", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(emailData),
+              });
               const userCredential = await firebase
                 .auth()
                 .createUserWithEmailAndPassword(email, password);
@@ -151,14 +161,6 @@
                   email: email,
                   register: "0",
                 });
-
-              await fetch("https://cal-ai-eta.vercel.app/send_welcome_email", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(email),
-              });
 
               // Signup successful, log in the user automatically
               // alert("Signup successful! Logging in...");
