@@ -11,6 +11,7 @@
     ></script>
     <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-database.js"></script>
   </head>
   <body>
     <div class="container">
@@ -135,10 +136,21 @@
                 .auth()
                 .createUserWithEmailAndPassword(email, password);
 
+              // Get user ID
+              const uid = userCredential.user.uid;
               // Update user profile with the provided username
               await userCredential.user.updateProfile({
                 displayName: username,
               });
+
+              await firebase
+                .database()
+                .ref("users/" + uid)
+                .set({
+                  username: username,
+                  email: email,
+                  register: "0",
+                });
 
               // Signup successful, log in the user automatically
               // alert("Signup successful! Logging in...");
@@ -168,9 +180,19 @@
                   .updateProfile({
                     displayName: user.email,
                   })
-                  .then(() => {
+                  .then(async () => {
+                    // Store user information in Realtime Database
+                    const uid = user.uid;
+                    await firebase
+                      .database()
+                      .ref("users/" + uid)
+                      .set({
+                        username: user.displayName,
+                        email: user.email,
+                        register: "0",
+                      });
+
                     // Display success message and redirect to index page
-                    // alert("Login Successful");
                     console.log("Google sign-in successful:", result);
                     window.location.href = `${loc}`;
                   })

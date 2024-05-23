@@ -303,10 +303,11 @@
               const currentTime = new Date();
               const expiresIn = new Date(data.expiresIn.seconds * 1000);
               if (currentTime < expiresIn) {
-                const discountedCourseFee = parseInt(courseFee) - data.discount;
+                const discountedCourseFee =
+                  parseInt(courseFee) * (1 - data.discount / 100);
                 document.getElementById(
                   "dcf"
-                ).textContent = `$${discountedCourseFee}`;
+                ).textContent = `$${discountedCourseFee.toFixed(2)}`;
 
                 document.getElementById("cf").classList.add("strikethrough");
                 couponMessage.classList.remove("applied2");
