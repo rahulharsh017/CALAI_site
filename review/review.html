@@ -122,8 +122,24 @@
         </div>
       </div>
     </div>
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-database.js"></script>
     <script src="https://www.paypal.com/sdk/js?client-id=Afy0DmAz8U6F_ockbxHb8Mw8OeAB6YAQqKsxa2s1ZFyK5VSDgRrMGUtc2OabS_w-Mpodu3HpuTvXudJi"></script>
     <script>
+      const firebaseConfig = {
+        // Your Firebase config object
+        apiKey: "AIzaSyDPze9CSiP1l4AfUNFHHJBiGTiPUs_i5qI",
+        authDomain: "calaisite.firebaseapp.com",
+        projectId: "calaisite",
+        storageBucket: "calaisite.appspot.com",
+        messagingSenderId: "137219193547",
+        appId: "1:137219193547:web:6961a289776640ea47794e",
+        measurementId: "G-M0B2Q3JX9V",
+        databaseURL: "https://calaisite-default-rtdb.firebaseio.com/",
+      };
+      firebase.initializeApp(firebaseConfig);
+
       //VARIABLES
       let tot = 0;
       const payNowButton = document.getElementById("payNowButton");
@@ -134,6 +150,9 @@
       const tncMessage = document.getElementById("tncMessage");
       const courseFeeElement = document.getElementById("course");
       const dcf = document.getElementById("dcf");
+      const registerOnlyCheckbox = document.getElementById(
+        "registerOnlyCheckbox"
+      );
 
       //URL BREAKDOWN
       const urlParams = new URLSearchParams(window.location.search);
@@ -144,6 +163,38 @@
       const countryCode = urlParams.get("country");
       const courseFee = urlParams.get("courseFee");
       const registrationFee = urlParams.get("registrationFee");
+
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          const userEmail = user.email;
+          // Fetch user data from Firebase Realtime Database using email
+          const userRef = firebase
+            .database()
+            .ref("users")
+            .orderByChild("email")
+            .equalTo(userEmail);
+
+          userRef.once("value").then((snapshot) => {
+            if (snapshot.exists()) {
+              const userData = snapshot.val();
+              // console.log(userData);
+              const userKey = Object.keys(userData)[1];
+              // console.log(userKey); // Get the key of the user
+              const registerStatus = userData[userKey].register;
+              // console.log(registerStatus);
+              if (registerStatus === "1") {
+                tot = parseInt(courseFee);
+                registerOnlyCheckbox.checked = true;
+                registerOnlyCheckbox.disabled = true; // Disable the checkbox
+              } else {
+                tot = parseInt(registrationFee) + parseInt(courseFee);
+              }
+              document.getElementById("tf").textContent = `$${tot}`;
+              console.log(tot);
+            }
+          });
+        }
+      });
 
       // REGISTER CHECKBOX
       registerOnlyCheckbox.addEventListener("change", function () {
@@ -176,15 +227,12 @@
       });
 
       // SETTING VALUES
-      document.getElementById("tf").textContent = `$${
-        parseInt(registrationFee) + parseInt(courseFee)
-      }`;
       document.getElementById("rf").textContent = `$${registrationFee}`;
       document.getElementById("cf").textContent = `$${courseFee}`;
       document.getElementById("name").textContent = name;
       document.getElementById("email").textContent = email;
       document.getElementById("certification").textContent = certification;
-      tot = parseInt(registrationFee) + parseInt(courseFee);
+      // tot = parseInt(registrationFee) + parseInt(courseFee);
 
       //TERMS & CONDITIONS BLOCK
       termsCheckbox.addEventListener("change", function () {
