@@ -46,6 +46,19 @@ body {
   font-weight: bold;
 }
 
+.email {
+  margin-right: 20px;
+  margin-top: 30px;
+  padding: 10px;
+}
+
+.email a {
+  text-decoration: none;
+  color: #192081;
+  font-size: 20px;
+  font-weight: bold; /* 'font-weight: large' is not a valid value, use 'bold' */
+}
+
 /* Main content styles */
 .main-content {
   padding-top: 60px; /* Adjust according to navbar height */
@@ -261,8 +274,18 @@ select {
   }
   .logo span {
 
-    font-size: 16px;
+    font-size: 11px;
 
+  }
+  .email {
+    margin-right: 0;
+    margin-top: 10px;
+    padding: 5px;
+    text-align: center; /* Center the text on small screens */
+  }
+
+  .email a {
+    font-size: 10px; /* Adjust font size for better readability on small screens */
   }
   h2 {
     font-size: 30px; /* Adjust the font size of h2 headings */
