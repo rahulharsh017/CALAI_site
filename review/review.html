@@ -45,7 +45,7 @@
             </p>
             <p>Your Name: <span id="name"></span></p>
             <p>Your Email: <span id="email"></span></p>
-            <p>Registration fee: <span id="rf"></span></p>
+            <!-- <p>Registration fee: <span id="rf"></span></p> -->
             <p id="course">
               Tution fee: <span id="cf"></span
               ><span
@@ -96,12 +96,12 @@
             >
             <p id="tncMessage"></p>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <input type="checkbox" id="registerOnlyCheckbox" />
             <label for="registerOnlyCheckbox"
               >I want to pay Registration fee only</label
             >
-          </div>
+          </div> -->
           <div class="form-group2">
             <button class="payNowButton" id="payNowButton">Pay Now</button>
           </div>
@@ -137,9 +137,9 @@
       const tncMessage = document.getElementById("tncMessage");
       const courseFeeElement = document.getElementById("course");
       const dcf = document.getElementById("dcf");
-      const registerOnlyCheckbox = document.getElementById(
-        "registerOnlyCheckbox"
-      );
+      // const registerOnlyCheckbox = document.getElementById(
+      //   "registerOnlyCheckbox"
+      // );
 
       //URL BREAKDOWN
       const urlParams = new URLSearchParams(window.location.search);
@@ -151,75 +151,45 @@
       const courseFee = urlParams.get("courseFee");
       const registrationFee = urlParams.get("registrationFee");
 
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          const userEmail = user.email;
-          // Fetch user data from Firebase Realtime Database using email
-          const userRef = firebase
-            .database()
-            .ref("users")
-            .orderByChild("email")
-            .equalTo(userEmail);
-
-          userRef.once("value").then((snapshot) => {
-            if (snapshot.exists()) {
-              const userData = snapshot.val();
-              // console.log(userData);
-              const userKey = Object.keys(userData)[1];
-              // console.log(userKey); // Get the key of the user
-              const registerStatus = userData[userKey].register;
-              // console.log(registerStatus);
-              if (registerStatus === "1") {
-                tot = parseInt(courseFee);
-                registerOnlyCheckbox.checked = true;
-                registerOnlyCheckbox.disabled = true; // Disable the checkbox
-              } else {
-                tot = parseInt(registrationFee) + parseInt(courseFee);
-              }
-              document.getElementById("tf").textContent = `$${tot}`;
-              console.log(tot);
-            }
-          });
-        }
-      });
-
       // REGISTER CHECKBOX
-      registerOnlyCheckbox.addEventListener("change", function () {
-        if (this.checked) {
-          // Checkbox is checked
-          scholarshipCodeGroup.classList.add("hidden");
-          tot = registrationFee;
-          document.getElementById("tf").textContent = `$${registrationFee}`;
-          courseFeeElement.classList.add("strikethrough");
-          document.getElementById("dcf").textContent = ``;
+      // registerOnlyCheckbox.addEventListener("change", function () {
+      //   if (this.checked) {
+      //     // Checkbox is checked
+      //     scholarshipCodeGroup.classList.add("hidden");
+      //     tot = registrationFee;
+      //     document.getElementById("tf").textContent = `$${registrationFee}`;
+      //     courseFeeElement.classList.add("strikethrough");
+      //     document.getElementById("dcf").textContent = ``;
 
-          document.getElementById("cf").classList.remove("strikethrough");
-          console.log(tot);
-          // Handle the action when user wants to register only
-        } else {
-          // Checkbox is not checked
-          applyButton.textContent = "Apply";
-          applyButton.classList.remove("applied");
-          applyButton.disabled = false;
-          couponMessage.textContent = "";
-          scholarshipCodeGroup.classList.remove("hidden");
-          tot = parseInt(registrationFee) + parseInt(courseFee);
-          document.getElementById("tf").textContent = `$${
-            parseInt(registrationFee) + parseInt(courseFee)
-          }`;
-          courseFeeElement.classList.remove("strikethrough");
-          console.log(tot);
-          // Handle the action when user doesn't want to register only
-        }
-      });
+      //     document.getElementById("cf").classList.remove("strikethrough");
+      //     console.log(tot);
+      //     // Handle the action when user wants to register only
+      //   } else {
+      //     // Checkbox is not checked
+      //     applyButton.textContent = "Apply";
+      //     applyButton.classList.remove("applied");
+      //     applyButton.disabled = false;
+      //     couponMessage.textContent = "";
+      //     scholarshipCodeGroup.classList.remove("hidden");
+      //     tot = parseInt(registrationFee) + parseInt(courseFee);
+      //     document.getElementById("tf").textContent = `$${
+      //       parseInt(registrationFee) + parseInt(courseFee)
+      //     }`;
+      //     courseFeeElement.classList.remove("strikethrough");
+      //     console.log(tot);
+      //     // Handle the action when user doesn't want to register only
+      //   }
+      // });
 
       // SETTING VALUES
-      document.getElementById("rf").textContent = `$${registrationFee}`;
+      tot = parseInt(courseFee);
+      console.log(tot);
+      document.getElementById("tf").textContent = `$${tot}`;
+      // document.getElementById("rf").textContent = `$${registrationFee}`;
       document.getElementById("cf").textContent = `$${courseFee}`;
       document.getElementById("name").textContent = name;
       document.getElementById("email").textContent = email;
       document.getElementById("certification").textContent = certification;
-      // tot = parseInt(registrationFee) + parseInt(courseFee);
 
       //TERMS & CONDITIONS BLOCK
       termsCheckbox.addEventListener("change", function () {
@@ -350,7 +320,7 @@
                 couponMessage.textContent = "Coupon is Applied";
 
                 // Update total amount
-                tot = parseInt(registrationFee) + discountedCourseFee;
+                tot = discountedCourseFee;
                 document.getElementById("tf").textContent = `$${tot}`;
                 const isCouponApplied = true;
 
@@ -363,7 +333,7 @@
                 couponMessage.classList.remove("applied");
                 couponMessage.classList.add("applied2");
                 couponMessage.textContent = "Coupon has expired";
-                tot = parseInt(registrationFee) + parseInt(courseFee);
+                tot = parseInt(courseFee);
                 document.getElementById("tf").textContent = `$${tot}`;
               }
             } else {
