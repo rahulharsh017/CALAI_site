@@ -85,6 +85,7 @@
           // Get the orderId from the URL query parameters
           const urlParams = new URLSearchParams(window.location.search);
           const orderId = urlParams.get("token");
+          const certification = urlParams.get("cretification");
           console.log(orderId);
           if (!orderId) {
             console.error("Order ID not found in URL.");
@@ -101,6 +102,7 @@
               },
               body: JSON.stringify({
                 orderId: orderId,
+                program: certification,
               }),
             }
           );
