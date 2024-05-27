@@ -36,25 +36,116 @@
 
     <div class="main-content">
       <div class="card">
-        <div class="container">
-          <h1 style="text-align: center">Payment Details</h1>
-          <div>
-            <p>
-              Selected Certification:
-              <span id="certification"></span>
-            </p>
-            <p>Your Name: <span id="name"></span></p>
-            <p>Your Email: <span id="email"></span></p>
-            <!-- <p>Registration fee: <span id="rf"></span></p> -->
-            <p id="course">
-              Tution fee: <span id="cf"></span
-              ><span
-                style="color: rgb(33, 190, 33); font-weight: bold"
-                id="dcf"
-              ></span>
-            </p>
-            <hr />
-            <p>Total fee: <span style="color: #cba135" id="tf"></span></p>
+        <div class="container" style="margin: auto; width: 95%; padding: 20px">
+          <h1
+            class="registration"
+            style="text-align: center; margin-bottom: 10px"
+          >
+            Payment Details
+          </h1>
+          <p
+            style="
+              text-align: center;
+              font-size: small;
+              color: black;
+              margin-top: 0;
+            "
+          >
+            Kindly review your program detail before completing your payment to
+            register for the course
+          </p>
+
+          <div style="margin-bottom: 20px">
+            <table style="width: 100%">
+              <tr>
+                <td
+                  style="
+                    width: 200px;
+                    padding: 10px 20px;
+                    text-align: left;
+                    font-weight: bolder;
+                    color: black;
+                  "
+                >
+                  Program:
+                </td>
+                <td style="padding: 10px 20px">
+                  <span style="font-weight: lighter" id="certification"></span>
+                </td>
+              </tr>
+              <tr>
+                <td
+                  style="
+                    width: 200px;
+                    padding: 10px 20px;
+                    text-align: left;
+                    font-weight: bolder;
+                    color: black;
+                  "
+                >
+                  Your Name:
+                </td>
+                <td style="padding: 10px 20px">
+                  <span style="font-weight: lighter" id="name"></span>
+                </td>
+              </tr>
+              <tr>
+                <td
+                  style="
+                    width: 200px;
+                    padding: 10px 20px;
+                    text-align: left;
+                    font-weight: bolder;
+                    color: black;
+                  "
+                >
+                  Your Email:
+                </td>
+                <td style="padding: 10px 20px">
+                  <span style="font-weight: lighter" id="email"></span>
+                </td>
+              </tr>
+              <tr>
+                <td
+                  style="
+                    width: 200px;
+                    padding: 10px 20px;
+                    text-align: left;
+                    font-weight: bolder;
+                    color: black;
+                  "
+                >
+                  Tution fee:
+                </td>
+                <td style="padding: 10px 20px">
+                  <span style="font-weight: lighter" id="cf"></span>
+                  <span
+                    style="color: rgb(33, 190, 33); font-weight: bold"
+                    id="dcf"
+                  ></span>
+                </td>
+              </tr>
+              <hr />
+              <tr>
+                <td
+                  style="
+                    width: 200px;
+                    padding: 10px 20px;
+                    text-align: left;
+                    font-weight: bolder;
+                    color: black;
+                  "
+                >
+                  Total Payable:
+                </td>
+                <td>
+                  <span
+                    style="padding: 10px 20px; color: #cba135"
+                    id="tf"
+                  ></span>
+                </td>
+              </tr>
+            </table>
           </div>
           <hr />
           <div class="form-group" id="scholarshipCodeGroup">
@@ -69,10 +160,17 @@
                 padding: 8px;
               "
             />
-            <button class="applyNowButton" id="applyButton">Apply</button>
-            <p id="couponMessage"></p>
+            <button
+              class="applyNowButton"
+              id="applyButton"
+              style="vertical-align: top"
+            >
+              Apply
+            </button>
+            <br />
+            <p id="couponMessage" style="display: inline-block"></p>
           </div>
-          <div class="form-group">
+          <div class="form-group" style="margin-top: 20px">
             <input type="checkbox" id="termsCheckbox" />
             <label for="termsCheckbox"
               >I accept the
@@ -96,16 +194,15 @@
             >
             <p id="tncMessage"></p>
           </div>
-          <!-- <div class="form-group">
-            <input type="checkbox" id="registerOnlyCheckbox" />
-            <label for="registerOnlyCheckbox"
-              >I want to pay Registration fee only</label
+          <div class="form-group2" style="margin-top: 20px; text-align: center">
+            <button
+              class="payNowButton"
+              id="payNowButton"
+              style="width: 100%; max-width: 200px"
             >
-          </div> -->
-          <div class="form-group2">
-            <button class="payNowButton" id="payNowButton">Pay Now</button>
+              Pay Now
+            </button>
           </div>
-          <!-- PayPal button container -->
         </div>
       </div>
     </div>

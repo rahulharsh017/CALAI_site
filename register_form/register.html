@@ -14,9 +14,10 @@
       rel="stylesheet"
     />
   </head>
+
   <body>
     <div id="loadingMessage" class="hidden loading-message">
-      Generating your Review, please wait...
+      Generating your Confirmation Page, please wait...
     </div>
     <!-- Navbar -->
     <nav class="navbar" style="display: flex; justify-content: space-between">
@@ -43,7 +44,18 @@
 
     <div class="main-content">
       <div class="container">
-        <h2>Register</h2>
+        <h2 class="registration" style="margin-bottom: 15px">
+          Registration Form
+        </h2>
+        <p
+          class="responsive-text"
+          style="text-align: center; font-size: 15px; margin-top: 1px"
+        >
+          Thank you for choosing CalAI!. We want to customise your experience by
+          delivering you the right content. To do that please complete your
+          registration
+        </p>
+
         <form id="registration-form" action="review.html" method="GET">
           <fieldset>
             <legend>Certification</legend>
@@ -135,9 +147,9 @@
               <select id="employment" name="employment" required>
                 <option value="">Select Your Employment Status</option>
                 <option value="employed">Employed</option>
-                <option value="unemployed">Unemployed</option>
                 <option value="self-employed">Self-employed</option>
                 <option value="student">Student</option>
+                <option value="unemployed">Unemployed</option>
               </select>
             </div>
             <div class="form-group">
@@ -167,7 +179,7 @@
 
           <!-- Submit Button -->
           <div class="form-group2">
-            <input type="submit" value="Register" />
+            <input type="submit" value="Proceed" />
           </div>
         </form>
       </div>
@@ -183,13 +195,16 @@
         .getElementById("registration-form")
         .addEventListener("submit", async function (event) {
           event.preventDefault(); // Prevent form submission
-          loadingMessage.classList.remove("hidden");
+          // loadingMessage.classList.remove("hidden");
           const certification = document.getElementById("certification").value;
           const email = document.getElementById("email").value;
           const name = document.getElementById("name").value;
           const phone = document.getElementById("phone").value;
 
           try {
+            timeoutId = setTimeout(() => {
+              loadingMessage.classList.remove("hidden");
+            }, 1000);
             const courseDetailsResponse = await fetch(
               "https://cal-ai-eta.vercel.app/getCourseDetails",
               {
@@ -198,6 +213,9 @@
                 body: JSON.stringify({ certificationId: certification }),
               }
             );
+
+            clearTimeout(timeoutId);
+            loadingMessage.classList.add("hidden");
 
             if (!courseDetailsResponse.ok) {
               throw new Error("Failed to get course details");
