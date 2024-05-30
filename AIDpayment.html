@@ -49,39 +49,14 @@
         <div id="paypal-button-container"></div>
 
         <!-- Include PayPal JavaScript SDK -->
-        <script src="https://www.paypal.com/sdk/js?client-id=Afy0DmAz8U6F_ockbxHb8Mw8OeAB6YAQqKsxa2s1ZFyK5VSDgRrMGUtc2OabS_w-Mpodu3HpuTvXudJi"></script>
-
+        <script src="https://www.paypal.com/sdk/js?client-id=BAAsfrt98UrvRnt42wPD5CRUCT5AreQUMRWzxCem6c_2KFCzeIXkkjoOwH4Ih_EHXKRZjZMZx-XTx5zqEE&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
+        <div id="paypal-container-9MXSRU7468YEJ"></div>
         <script>
-          // Render PayPal button
           paypal
-            .Buttons({
-              createOrder: function (data, actions) {
-                return actions.order.create({
-                  purchase_units: [
-                    {
-                      amount: {
-                        value: "50.00", // Specify the payment amount
-                      },
-                    },
-                  ],
-                });
-              },
-              onApprove: function (data, actions) {
-                // Capture the funds
-                return actions.order.capture().then(function (details) {
-                  // Handle payment success
-                  alert(
-                    "Transaction completed by " + details.payer.name.given_name
-                  );
-                  // Redirect to a thank-you page or perform other actions
-                });
-              },
-              onCancel: function (data) {
-                // Handle payment cancellation
-                alert("Payment cancelled");
-              },
+            .HostedButtons({
+              hostedButtonId: "9MXSRU7468YEJ",
             })
-            .render("#paypal-button-container");
+            .render("#paypal-container-9MXSRU7468YEJ");
         </script>
       </div>
     </div>
