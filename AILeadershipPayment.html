@@ -48,55 +48,47 @@
       </div>
       <div class="w-[500px] text-center p-4">
         <div id="terms-container">
-          <input type="checkbox" id="terms-checkbox" />
+          <p>Agree to continue for Payment</p>
+          <input type="checkbox" id="terms-checkbox" required />
           <label for="terms-checkbox">
             I agree to the
-            <a href="./terms&conditions.html">Terms and Conditions</a> and<a
-              href="./privact.html"
+            <a href="./terms&conditions.html" style="color: blue"
+              >Terms and Conditions</a
             >
-              Privacy Policy</a
-            >
+            and
+            <a href="./privact.html" style="color: blue">Privacy Policy</a>
           </label>
         </div>
         <div id="paypal-container-MB3VV2JNDXNAJ"></div>
-        <!-- Include PayPal JavaScript SDK -->
-        <script src="https://www.paypal.com/sdk/js?client-id=BAAsfrt98UrvRnt42wPD5CRUCT5AreQUMRWzxCem6c_2KFCzeIXkkjoOwH4Ih_EHXKRZjZMZx-XTx5zqEE&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
-        <script>
-          const checkbox = document.getElementById("terms-checkbox");
-          const paypalContainer = document.getElementById(
-            "paypal-container-MB3VV2JNDXNAJ"
-          );
-
-          function renderPaypalButton() {
-            paypal
-              .HostedButtons({
-                hostedButtonId: "MB3VV2JNDXNAJ",
-                onInit: function (data, actions) {
-                  actions.disable();
-                  checkbox.addEventListener("change", function (event) {
-                    if (event.target.checked) {
-                      actions.enable();
-                    } else {
-                      actions.disable();
-                    }
-                  });
-                },
-              })
-              .render("#paypal-container-MB3VV2JNDXNAJ");
-          }
-
-          renderPaypalButton();
-
-          // Add click event listener to PayPal button container
-          paypalContainer.addEventListener("click", function () {
-            if (!checkbox.checked) {
-              alert(
-                "Please agree to the Terms and Conditions before proceeding."
-              );
-            }
-          });
-        </script>
       </div>
+
+      <script src="https://www.paypal.com/sdk/js?client-id=BAAsfrt98UrvRnt42wPD5CRUCT5AreQUMRWzxCem6c_2KFCzeIXkkjoOwH4Ih_EHXKRZjZMZx-XTx5zqEE&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
+
+      <script>
+        const termsCheckbox = document.getElementById("terms-checkbox");
+        const paypalButtonContainer = document.getElementById(
+          "paypal-container-MB3VV2JNDXNAJ"
+        );
+
+        paypal
+          .HostedButtons({
+            hostedButtonId: "MB3VV2JNDXNAJ",
+          })
+          .render("#paypal-container-MB3VV2JNDXNAJ");
+        paypalButtonContainer.style.pointerEvents = "none";
+        paypalButtonContainer.style.opacity = 0.5; // Optional: Visually indicate disabled state
+
+        termsCheckbox.addEventListener("change", () => {
+          if (termsCheckbox.checked) {
+            paypalButtonContainer.style.pointerEvents = "auto";
+            paypalButtonContainer.style.opacity = 1; // Optional: Restore normal appearance
+            // Render the PayPal button logic here (replace with your actual logic)
+          } else {
+            paypalButtonContainer.style.pointerEvents = "none";
+            paypalButtonContainer.style.opacity = 0.5; // Optional: Visually indicate disabled state
+          }
+        });
+      </script>
     </div>
   </body>
 </html>
