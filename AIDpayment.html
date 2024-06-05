@@ -36,21 +36,60 @@
         <h2 class="text-[2rem] font-semibold">Complete Your Registration!</h2>
         <p>
           Complete your CalAI® registration to personalize your AI journey with
-          tailored content ."
+          tailored content.
         </p>
       </div>
       <div class="w-[500px] text-center p-4">
+        <div id="terms-container">
+          <input type="checkbox" id="terms-checkbox" />
+          <label for="terms-checkbox"
+            >I agree to the
+            <a href="./terms&conditions.html">Terms and Conditions</a> and<a
+              href="./privact.html"
+            >
+              Privacy Policy</a
+            ></label
+          >
+        </div>
         <div id="paypal-button-container"></div>
 
         <!-- Include PayPal JavaScript SDK -->
         <script src="https://www.paypal.com/sdk/js?client-id=BAAsfrt98UrvRnt42wPD5CRUCT5AreQUMRWzxCem6c_2KFCzeIXkkjoOwH4Ih_EHXKRZjZMZx-XTx5zqEE&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
         <div id="paypal-container-9MXSRU7468YEJ"></div>
         <script>
-          paypal
-            .HostedButtons({
-              hostedButtonId: "9MXSRU7468YEJ",
-            })
-            .render("#paypal-container-9MXSRU7468YEJ");
+          const checkbox = document.getElementById("terms-checkbox");
+          const paypalContainer = document.getElementById(
+            "paypal-container-9MXSRU7468YEJ"
+          );
+
+          function renderPaypalButton() {
+            paypal
+              .HostedButtons({
+                hostedButtonId: "9MXSRU7468YEJ",
+                onInit: function (data, actions) {
+                  actions.disable();
+                  checkbox.addEventListener("change", function (event) {
+                    if (event.target.checked) {
+                      actions.enable();
+                    } else {
+                      actions.disable();
+                    }
+                  });
+                },
+              })
+              .render("#paypal-container-9MXSRU7468YEJ");
+          }
+
+          renderPaypalButton();
+
+          // Add click event listener to PayPal button container
+          paypalContainer.addEventListener("click", function () {
+            if (!checkbox.checked) {
+              alert(
+                "Please agree to the Terms and Conditions before proceeding."
+              );
+            }
+          });
         </script>
       </div>
     </div>
