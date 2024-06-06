@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CalAI-Payments</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div
+      id="banner"
+      class="border-b-2 flex border-black bg-white w-full justify-between px-4"
+    >
+      <div class="flex">
+        <a href="index.html">
+          <img
+            class="h-[80px]"
+            src="Cal_ai_orign-removebg-preview.png"
+            alt=""
+          />
+        </a>
+        <p
+          class="relative mt-[-5px] left-[-20px] text-[50px] font-light text-[#074D8D]"
+        >
+          <a href="index.html">&vert;</a>
+        </p>
+        <h1
+          class="relative top-5 text-[#074D8D] text-[25px] font-bold md:text-[14px]"
+        >
+          <a href="index.html">California Artificial Intelligence Institute</a>
+        </h1>
+      </div>
+      <div class="md:hidden">
+        <p class="mt-7 relative text-[1rem] text-[#074D8D] font-bold md:hidden">
+          Email: Info@calai.org
+        </p>
+      </div>
+    </div>
+    <div
+      class="flex flex-col justify-center w-full items-center gap-5 mt-4 md:p-4"
+    >
+      <div class="text-center">
+        <h2 class="text-[2rem] font-semibold">Complete Your Registration!</h2>
+        <p>
+          Complete your CalAI® registration to personalize your AI journey with
+          tailored content.
+        </p>
+      </div>
+      <div class="w-[500px] text-center p-4">
+        <div id="paypal-container-HE267BDD4MSRS"></div>
+        <div id="terms-container">
+          <input type="checkbox" id="terms-checkbox" required />
+          <label for="terms-checkbox">
+            I agree to the
+            <a href="./terms&conditions.html" style="color: blue"
+              >Terms and Conditions</a
+            >
+            and
+            <a href="./privact.html" style="color: blue">Privacy Policy</a>
+          </label>
+        </div>
+      </div>
+
+     <script src="https://www.paypal.com/sdk/js?client-id=BAAsfrt98UrvRnt42wPD5CRUCT5AreQUMRWzxCem6c_2KFCzeIXkkjoOwH4Ih_EHXKRZjZMZx-XTx5zqEE&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
+
+      <script>
+        const termsCheckbox = document.getElementById("terms-checkbox");
+        const paypalButtonContainer = document.getElementById(
+          "paypal-container-AJUNVTFYMD2DN"
+        );
+
+        paypal
+          .HostedButtons({
+            hostedButtonId: "AJUNVTFYMD2DN",
+          })
+          .render("#paypal-container-AJUNVTFYMD2DN");
+        paypalButtonContainer.style.pointerEvents = "none";
+        paypalButtonContainer.style.opacity = 0.5; // Optional: Visually indicate disabled state
+
+        termsCheckbox.addEventListener("change", () => {
+          if (termsCheckbox.checked) {
+            paypalButtonContainer.style.pointerEvents = "auto";
+            paypalButtonContainer.style.opacity = 1; // Optional: Restore normal appearance
+            // Render the PayPal button logic here (replace with your actual logic)
+          } else {
+            paypalButtonContainer.style.pointerEvents = "none";
+            paypalButtonContainer.style.opacity = 0.5; // Optional: Visually indicate disabled state
+          }
+        });
+      </script>
+    </div>
+  </body>
+</html>
