@@ -179,7 +179,7 @@
         <div id="banner" class=" flex bg-white w-full justify-between px-4">
           <div class="flex">
             <a href="index.html">
-            <img class="h-[80px]" src="Cal_ai_orign-removebg-preview [MConverter.eu].avif" alt="CalAI-logo">
+              <img class="h-[80px]" src="Cal_ai_orign-removebg-preview [MConverter.eu].avif" alt="CalAI-logo">
           </a>
           <p class="relative top-[-8px] left-[-20px] text-[55px] font-light text-[#192081]"><a href="index.html">&vert;</a></p>
             <h1 class = "relative top-5 text-[#074D8D] text-[25px] font-bold md:text-[14px]"><a href="index.html">California Artificial Intelligence Institute</a></h1>
@@ -351,7 +351,7 @@
             </div>
 
             <div class="flex mx-7 gap-6">
-                <img class="h-[60px]" src="Email support.png" alt="CalAI-Email-Support">
+                <img class="h-[60px]" src="Email support.avif" alt="CalAI-Email-Support">
                 <div id="details">
                     <h2 class="text-[22px] text-[#CBA135] font-semibold">Unmatched 24/7 Mentor Support</h2>
                     <p class ="text-[18px]">Experience continuous guidance and support with our dedicated team of mentors available round the clock. Get real-time assistance, feedback, and insights to enhance your understanding and succeed in your learning journey
@@ -683,10 +683,10 @@
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in, redirect to the given URL
-        window.location.href = "./register_form/register.html";
+        window.location.href = "/register_form/register.html";
       } else {
         // User is not signed in, redirect to the signup page
-        window.location.href = "./login/login.html?location=../register_form/register.html";
+        window.location.href = "./login/login.html?location=/register_form/register.html";
       }
     });
   }  
@@ -732,7 +732,7 @@
       });
     } else {
       // User is signed out, so redirect to login page
-      window.location.href = "./login/login.html?location=../index.html";
+      window.location.href = "./login/login.html?location=/index.html";
     }
   });
 
